@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+  <h1>The Goods Page</h1>
+  <table>
+     <!-- 表头部分 -->
+     <thead>
+        <tr>
+           <th>id</th>
+           <th>name</th>
+           <th>remark</th>
+           <th>createdTime</th>
+           <th>operation</th>
+        </tr>
+     </thead>
+     <!-- 表体部分 -->
+     <tbody>
+         <!-- 借助thymeleaf模板引擎中的属性获取对象中的值并进行呈现 -->
+        <tr th:each="g:${list}">
+           <td th:text="${g.id}"></td>
+           <td th:text="${g.name}"></td>
+           <td th:text="${g.remark}"></td>
+           <td th:text="${#dates.format(g.createdTime, 'yyyy/MM/dd HH:mm')}"></td>
+           <td><a th:href="@{/goods/doDeleteById(id=${g.id})}">delete</a></td>
+        </tr>
+     </tbody>
+  </table>
+</body>
+</html>
