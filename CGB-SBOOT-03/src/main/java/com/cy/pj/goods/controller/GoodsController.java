@@ -19,7 +19,6 @@ import com.cy.pj.goods.service.GoodsService;
 public class GoodsController {
 	  @Autowired
 	  private GoodsService goodsService;
-	  
 	  @RequestMapping("doSaveObject")
 	  public String doSaveObject(Goods entity) {
 		  goodsService.saveObject(entity);
