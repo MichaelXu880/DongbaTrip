@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" >
+</head>
+<body>
+
+   <h1>The Activitys</h1>
+   <div class="container">
+   <div>
+     <button type="button" class="btn btn-primary">添加</button>
+   </div>
+   <div>
+      <table class="table">
+         <thead>
+            <tr>
+              <th>id</th>
+              <th>title</th>
+              <th>category</th>
+              <th>startTime</th>
+              <th>endTime</th>
+              <th>state</th>
+              <th>createdTime</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr th:each="a:${list}">
+               <td th:text="${a.id}"></td>
+               <td th:text="${a.title}"></td>
+               <td th:text="${a.category}"></td>
+               <td th:text="${#dates.format(a.startTime, 'yyyy/MM/dd HH:mm')}"></td>
+               <td th:text="${#dates.format(a.endTime, 'yyyy/MM/dd HH:mm')}"></td>
+               <td th:text="${a.state}"></td>
+               <td th:text="${#dates.format(a.createdTime, 'yyyy/MM/dd HH:mm')}"></td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+   </div>
+</body>
+</html>
