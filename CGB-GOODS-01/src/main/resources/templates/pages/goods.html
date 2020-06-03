@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+   <h1>Show Goods by Thymeleaf</h1>
+   <div>
+     <table>
+       <thead>
+       <tr>
+          <th>id</th>
+          <th>name</th>
+          <th>remark</th>
+          <th>createdTime</th>
+       </tr>
+       </thead>
+       <tbody>
+       <tr th:each="g:${list}">
+          <td th:text="${g.id}"></td>
+          <td th:text="${g.name}"></td>
+          <td th:text="${g.remark}"></td>
+          <td th:text="${#dates.format(g.createdTime, 'yyyy/MM/dd HH:mm')}"></td>
+       </tr>
+       </tbody>
+     </table>
+   </div>
+</body>
+</html>
