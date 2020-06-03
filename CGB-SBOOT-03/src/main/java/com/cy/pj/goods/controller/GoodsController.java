@@ -20,6 +20,12 @@ public class GoodsController {
 	  @Autowired
 	  private GoodsService goodsService;
 	  
+	  @RequestMapping("doSaveObject")
+	  public String doSaveObject(Goods entity) {
+		  goodsService.saveObject(entity);
+		  return "forward:doGoodsUI";
+	  }
+	  
 	  @RequestMapping("doDeleteById")
 	  public String doDeleteById(Integer id,Model model) {
 		  goodsService.deleteById(id);

@@ -7,6 +7,9 @@ import com.cy.pj.goods.pojo.Goods;
  */
 public interface GoodsService {
    
+	 int saveObject(Goods entity);
+	
 	 List<Goods> findObjects();
-	  int deleteById(Integer id);
+	 
+	 int deleteById(Integer id);
 }

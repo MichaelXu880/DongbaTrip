@@ -21,6 +21,18 @@ public class GoodsServiceImpl implements GoodsService{
 	@Autowired
 	private GoodsDao goodsDao;
 	
+	
+	@Override
+	public int saveObject(Goods entity) {
+		//1.对参数进行校验
+		//2.保存对象
+		long start=System.currentTimeMillis();
+		int rows=goodsDao.insertObject(entity);
+		long end=System.currentTimeMillis();
+		logger.info("execute time: {}",(end-start));
+		return rows;
+	}
+	
 	@Override
 	public int deleteById(Integer id) {
 		long start=System.currentTimeMillis();
