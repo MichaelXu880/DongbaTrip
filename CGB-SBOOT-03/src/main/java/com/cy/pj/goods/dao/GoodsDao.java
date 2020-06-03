@@ -2,6 +2,7 @@ package com.cy.pj.goods.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -15,7 +16,14 @@ import com.cy.pj.goods.pojo.Goods;
  */
 @Mapper
 public interface GoodsDao {
-	
+
+	   /**
+	    * 将内存中的对象存储到数据库
+	    * @param entity
+	    * @return
+	    */
+	   @Insert("insert into tb_goods (name,remark,createdTime) values (#{name},#{remark},now())")
+	   int insertObject(Goods entity);
 	   /**
 	    * 查询所有商品信息
 	    * @return
