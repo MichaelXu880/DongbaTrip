@@ -26,8 +26,11 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 	@Override
 	public int saveActivity(Activity entity) {
-		// TODO Auto-generated method stub
-		return activityDao.insertActivity(entity);
+		if(entity.getId()==null) {
+		  return activityDao.insertActivity(entity);
+		}else {
+		  return activityDao.updateActivity(entity);
+		}
 	}
 	
 	@Override

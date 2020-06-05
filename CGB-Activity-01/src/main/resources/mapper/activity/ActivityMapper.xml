@@ -10,4 +10,15 @@
       values
       (#{title},#{category},#{startTime},#{endTime},#{state},#{remark},now(),#{createdUser})
    </insert>
+   <update id="updateActivity">
+      update tb_activity
+      set title=#{title},
+          category=#{category},
+          startTime=#{startTime},
+          endTime=#{endTime},
+          remark=#{remark}
+      where id=#{id}
+   </update>
 </mapper>
+
+

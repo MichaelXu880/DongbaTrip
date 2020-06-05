@@ -16,6 +16,8 @@ public interface ActivityDao {
 	 int deleteById(Integer id);
 	
 	 int insertActivity(Activity entity);
+	 
+	 int updateActivity(Activity entity);
 
 	 @Select("select * from tb_activity order by createdTime desc")
 	 List<Activity> findActivitys();
