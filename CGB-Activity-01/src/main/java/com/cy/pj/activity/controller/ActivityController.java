@@ -20,6 +20,7 @@ public class ActivityController {
      
      @RequestMapping("doFindById")
      public String doFindById(Integer id,Model model) {
+    	 
     	 Activity aty=activityService.findById(id);
     	 model.addAttribute("aty", aty);
     	 return "forward:doFindActivitys";
