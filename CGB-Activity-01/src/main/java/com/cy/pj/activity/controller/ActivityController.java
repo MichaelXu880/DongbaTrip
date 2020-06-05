@@ -2,6 +2,8 @@ package com.cy.pj.activity.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +18,18 @@ public class ActivityController {
      @Autowired
 	 private ActivityService activityService;
      
+     @RequestMapping("doDeleteById")
+     public String doDeleteById(Integer id) {
+    	 activityService.deleteById(id);
+    	 return "forward:doFindActivitys";
+     }
+     
      @RequestMapping("doSaveActivity")
      public String doSaveActivity(Activity entity) {
     	 activityService.saveActivity(entity);
     	 return "forward:doFindActivitys";
      }
+     
      @RequestMapping("doActivityEditUI")
      public String doActivityEditUI() {
     	 return "activity_edit";

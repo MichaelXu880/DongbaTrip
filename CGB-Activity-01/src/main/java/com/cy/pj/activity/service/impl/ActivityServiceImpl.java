@@ -15,6 +15,11 @@ public class ActivityServiceImpl implements ActivityService {
 	private ActivityDao activityDao;
 	
 	@Override
+	public int deleteById(Integer id) {
+		// TODO Auto-generated method stub
+		return activityDao.deleteById(id);
+	}
+	@Override
 	public int saveActivity(Activity entity) {
 		// TODO Auto-generated method stub
 		return activityDao.insertActivity(entity);

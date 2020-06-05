@@ -1,5 +1,6 @@
 package com.cy.pj.activity.dao;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -8,6 +9,8 @@ import com.cy.pj.activity.pojo.*;
 @Mapper
 public interface ActivityDao {
 	
+	 @Delete("delete from tb_activity where id=#{id}")
+	 int deleteById(Integer id);
 	
 	 int insertActivity(Activity entity);
 

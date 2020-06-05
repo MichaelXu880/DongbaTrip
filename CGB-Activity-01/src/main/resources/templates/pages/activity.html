@@ -11,7 +11,7 @@
 	<div class="container">
 		<div>
 			<button type="button" class="btn btn-primary"
-				onclick="javascript:location.href='doActivityEditUI'">普通方式添加</button>
+			onclick="javascript:location.href='doActivityEditUI'">普通方式添加</button>
 
 			<button type="button" class="btn btn-primary"
 				data-toggle="modal" data-target="#myModal">模态框方式添加</button>
@@ -27,6 +27,7 @@
 						<th>endTime</th>
 						<th>state</th>
 						<th>createdTime</th>
+						<th>Operation</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -38,6 +39,7 @@
 						<td th:text="${#dates.format(a.endTime, 'yyyy/MM/dd HH:mm')}"></td>
 						<td th:text="${a.state}"></td>
 						<td th:text="${#dates.format(a.createdTime, 'yyyy/MM/dd HH:mm')}"></td>
+						<td><button class="btn btn-danger" th:onclick="doDeleteById([[${a.id}]])">删除</button></td>
 					</tr>
 				</tbody>
 			</table>
@@ -105,8 +107,13 @@
 	<script type="text/javascript" src="/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
+	     function doDeleteById(id){
+	    	if(!confirm("确定删除吗"))return;
+		    location.href="doDeleteById?id="+id;
+	     }
 	     function doSaveActivity(){
 	    	// alert("save activity");
+	    	//对表单内容进行校验
 	    	//执行表单提交操作(基于js方式提交表单)
 	    	$("#atyFormId").submit();
 	    	//关闭模态框
