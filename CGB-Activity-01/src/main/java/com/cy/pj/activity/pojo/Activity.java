@@ -12,8 +12,8 @@ public class Activity {
 	private Long id;
 	private String title;
 	private String category;
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")//setStartTime
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")//getStartTime
 	private Date startTime;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")

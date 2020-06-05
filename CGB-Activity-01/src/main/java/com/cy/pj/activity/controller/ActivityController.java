@@ -11,6 +11,7 @@ import com.cy.pj.activity.service.ActivityService;
 @Controller
 @RequestMapping("/activity/")
 public class ActivityController {
+	
      @Autowired
 	 private ActivityService activityService;
      
@@ -30,7 +31,7 @@ public class ActivityController {
      @RequestMapping("doSaveActivity")
      public String doSaveActivity(Activity entity) {
     	 activityService.saveActivity(entity);
-    	 return "forward:doFindActivitys";
+    	 return "redirect:doFindActivitys";
      }
      
      @RequestMapping("doActivityEditUI")
