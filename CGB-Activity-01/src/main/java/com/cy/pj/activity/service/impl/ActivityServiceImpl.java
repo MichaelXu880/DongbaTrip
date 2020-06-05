@@ -13,6 +13,13 @@ import com.cy.pj.activity.service.ActivityService;
 public class ActivityServiceImpl implements ActivityService {
 	@Autowired
 	private ActivityDao activityDao;
+	
+	@Override
+	public int saveActivity(Activity entity) {
+		// TODO Auto-generated method stub
+		return activityDao.insertActivity(entity);
+	}
+	
 	@Override
 	public List<Activity> findActivitys() {
 		//.....

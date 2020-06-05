@@ -16,11 +16,15 @@ public class ActivityController {
      @Autowired
 	 private ActivityService activityService;
      
+     @RequestMapping("doSaveActivity")
+     public String doSaveActivity(Activity entity) {
+    	 activityService.saveActivity(entity);
+    	 return "forward:doFindActivitys";
+     }
      @RequestMapping("doActivityEditUI")
      public String doActivityEditUI() {
     	 return "activity_edit";
      }
-     
 	 @RequestMapping("doFindActivitys")
 	 public String doFindActivitys(Model model) {
 		 List<Activity> list=activityService.findActivitys();
