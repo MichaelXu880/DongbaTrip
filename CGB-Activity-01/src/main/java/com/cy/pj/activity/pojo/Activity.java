@@ -10,7 +10,7 @@ public class Activity {
 	private String category;
 	private Date startTime;
 	private Date endTime;
-	private int state;
+	private int state=1;
 	private String remark;
 	private Date createdTime;
 	private String createdUser;

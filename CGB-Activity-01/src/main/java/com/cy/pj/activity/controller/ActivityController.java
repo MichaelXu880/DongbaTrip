@@ -15,6 +15,12 @@ import com.cy.pj.activity.service.ActivityService;
 public class ActivityController {
      @Autowired
 	 private ActivityService activityService;
+     
+     @RequestMapping("doActivityEditUI")
+     public String doActivityEditUI() {
+    	 return "activity_edit";
+     }
+     
 	 @RequestMapping("doFindActivitys")
 	 public String doFindActivitys(Model model) {
 		 List<Activity> list=activityService.findActivitys();
