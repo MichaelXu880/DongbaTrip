@@ -2,13 +2,17 @@ package com.cy.pj.activity.pojo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**活动模块用于存储活动信息的一个对象*/
 public class Activity {
 
 	private Long id;
 	private String title;
 	private String category;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date startTime;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date endTime;
 	private int state=1;
 	private String remark;
