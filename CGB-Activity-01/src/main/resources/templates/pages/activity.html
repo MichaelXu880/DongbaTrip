@@ -27,7 +27,7 @@
 						<th>endTime</th>
 						<th>state</th>
 						<th>createdTime</th>
-						<th>Operation</th>
+						<th colspan="2">Operation</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -39,7 +39,10 @@
 						<td th:text="${#dates.format(a.endTime, 'yyyy/MM/dd HH:mm')}"></td>
 						<td th:text="${a.state}"></td>
 						<td th:text="${#dates.format(a.createdTime, 'yyyy/MM/dd HH:mm')}"></td>
-						<td><button class="btn btn-danger" th:onclick="doDeleteById([[${a.id}]])">删除</button></td>
+						<td>
+						<button class="btn btn-danger btn-sm" th:onclick="doDeleteById([[${a.id}]])">删除</button>
+						<button class="btn btn-warning btn-sm" th:onclick="doLoadById([[${a.id}]])">更新</button>
+						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -107,6 +110,10 @@
 	<script type="text/javascript" src="/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
+	     function doLoadById(id){
+	    	 location.href="doFindById?id="+id;
+	     }
+	
 	     function doDeleteById(id){
 	    	if(!confirm("确定删除吗"))return;
 		    location.href="doDeleteById?id="+id;

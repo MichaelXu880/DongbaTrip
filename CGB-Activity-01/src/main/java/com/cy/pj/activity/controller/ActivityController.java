@@ -18,6 +18,13 @@ public class ActivityController {
      @Autowired
 	 private ActivityService activityService;
      
+     @RequestMapping("doFindById")
+     public String doFindById(Integer id,Model model) {
+    	 Activity aty=activityService.findById(id);
+    	 model.addAttribute("aty", aty);
+    	 return "forward:doFindActivitys";
+     }
+     
      @RequestMapping("doDeleteById")
      public String doDeleteById(Integer id) {
     	 activityService.deleteById(id);

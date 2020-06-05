@@ -4,6 +4,7 @@ import com.cy.pj.activity.pojo.*;
 
 public interface ActivityService {
 	   
+	   Activity findById(Integer id);
 	   int deleteById(Integer id);
 	   int saveActivity(Activity entity);
 	   List<Activity> findActivitys();
