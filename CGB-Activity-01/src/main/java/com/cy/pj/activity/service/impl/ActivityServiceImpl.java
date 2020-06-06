@@ -37,7 +37,8 @@ public class ActivityServiceImpl implements ActivityService {
 	
 	@Override
 	public List<Activity> findActivitys() {
-		//.....
+		try{Thread.sleep(5000);}
+		catch (Exception e) {e.printStackTrace();}
 		return activityDao.findActivitys();
 	}
 
