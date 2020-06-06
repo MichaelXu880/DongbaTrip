@@ -146,18 +146,43 @@
 	     function doLoadById(id){
 	    	 location.href="doFindById?id="+id;
 	     }
+	     function doSaveActivity(){
+		    	// alert("save activity");
+		    	//对表单内容进行校验
+		    	//执行表单提交操作(基于js方式提交表单)
+		    	$("#atyFormId").submit();
+		    	//关闭模态框
+		    	$('#myModal').modal('hide');
+		     }
+	     //基于ajax方式执行删除操作
 	     function doDeleteById(id){
 	    	if(!confirm("确定删除吗"))return;
-		    location.href="doDeleteById?id="+id;
+		    //location.href="doDeleteById?id="+id;
+		    var url="doDeleteById";
+		    var params="id="+id;
+		    //var obj=$(this);
+		    doAjaxGet(url,params,function(result){
+		    	alert(result);
+		    	//思考刷新的方式?...
+		    });
 	     }
-	     function doSaveActivity(){
-	    	// alert("save activity");
-	    	//对表单内容进行校验
-	    	//执行表单提交操作(基于js方式提交表单)
-	    	$("#atyFormId").submit();
-	    	//关闭模态框
-	    	$('#myModal').modal('hide');
+	     //基于此函数向服务端发起ajax Get请求
+	     function doAjaxGet(url,params,callback){
+	    	 //1.创建xhr对象
+	       	 var xhr=new XMLHttpRequest();
+	    	 //2.注册Xhr对象的状态监听函数
+	         xhr.onreadystatechange=function(){
+	       	    if(xhr.readyState==4&&xhr.status==200){
+	       	       callback(xhr.responseText);
+	       	    }
+	       	 }
+	    	 //3.创建一个连接
+	    	 xhr.open("GET",url+"?"+params,true)
+	    	 //4.发送请求
+	    	 xhr.send(null)
 	     }
+	     
+
 	</script>
 </body>
 </html>

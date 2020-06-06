@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cy.pj.activity.pojo.Activity;
 import com.cy.pj.activity.service.ActivityService;
@@ -23,9 +24,10 @@ public class ActivityController {
      }
      
      @RequestMapping("doDeleteById")
+     @ResponseBody
      public String doDeleteById(Integer id) {
     	 activityService.deleteById(id);
-    	 return "forward:doFindActivitys";
+    	 return "delete ok";
      }
      
      @RequestMapping("doSaveActivity")
