@@ -6,10 +6,20 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**活动模块用于存储活动信息的一个对象*/
-@Data
+//@Data
+@Setter
+@Getter
+@ToString
+@NoArgsConstructor  //无参构造
+@AllArgsConstructor //所有参数的构造函数
 public class Activity {
 
 	private Long id;
@@ -26,5 +36,9 @@ public class Activity {
 	private String remark;
 	private Date createdTime;
 	private String createdUser;
+	
+	public Activity(Long id) {
+		this.id=id;
+	}
 	
 }
