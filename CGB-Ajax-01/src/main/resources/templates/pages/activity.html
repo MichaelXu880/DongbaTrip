@@ -175,8 +175,14 @@
 	    		 //$("tbody").prepend(doCreateRow(jsonObj));
 	    		 if(id){//id有值说明是更新
 	    		   var tr=$("#"+id).parents("tr");
-	    		   tr.before(doCreateRow(jsonObj));
-	    		   tr.remove();
+	    		   //方法1：
+	    		   //tr.before(doCreateRow(jsonObj));
+	    		   //tr.remove();
+	    		   //方法2：
+	    		   tr.find("td:eq(1)").text(jsonObj.title);
+	    		   tr.find("td:eq(2)").text(jsonObj.category);
+	    		   tr.find("td:eq(3)").text(jsonObj.startTime);
+	    		   tr.find("td:eq(4)").text(jsonObj.endTime);
 	    		 }else{
 	    		   $("tbody").find("tr:eq(0)").before(doCreateRow(jsonObj));
 	    		 }
