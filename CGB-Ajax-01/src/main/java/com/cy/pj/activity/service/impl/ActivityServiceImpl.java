@@ -32,8 +32,8 @@ public class ActivityServiceImpl implements ActivityService {
 		if(entity.getId()==null) {
 		   entity.setCreatedTime(new Date());
 		   System.out.println("insert.before="+entity);
-		   activityDao.insertActivity(entity);
-		   System.out.println("insert.after="+entity);
+		   activityDao.insertActivity(entity);//insert,setId
+		   System.out.println("insert.after="+entity);//
 		}else {
 		   activityDao.updateActivity(entity);
 		}
@@ -42,8 +42,8 @@ public class ActivityServiceImpl implements ActivityService {
 	
 	@Override
 	public List<Activity> findActivitys() {
-		//try{Thread.sleep(5000);}
-		//catch (Exception e) {e.printStackTrace();}
+		try{Thread.sleep(5000);}
+		catch (Exception e) {e.printStackTrace();}
 		return activityDao.findActivitys();
 	}
 

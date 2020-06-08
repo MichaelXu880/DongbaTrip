@@ -22,7 +22,7 @@ import lombok.ToString;
 @AllArgsConstructor //所有参数的构造函数
 public class Activity {
 
-	private Long id;
+	private Long id;//null
 	private String title;
 	private String category;
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")//setStartTime

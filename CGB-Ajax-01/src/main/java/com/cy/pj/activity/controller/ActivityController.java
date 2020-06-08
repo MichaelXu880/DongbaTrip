@@ -3,6 +3,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -27,23 +28,43 @@ public class ActivityController {
      @ResponseBody
      public String doDeleteById(Integer id) {
     	 activityService.deleteById(id);
-    	 return "delete ok";
+    	 return "delete ok"; 
      }
      
      @RequestMapping("doSaveActivity")
      @ResponseBody //spring mvc 会将返回的对象转换为json格式字符串
      public Activity doSaveActivity(Activity entity) {
-    	 return activityService.saveActivity(entity);
+    	 Activity aty=activityService.saveActivity(entity);
+    	 return aty;
      }
      
      @RequestMapping("doActivityEditUI")
      public String doActivityEditUI() {
     	 return "activity_edit";
      }
-	 @RequestMapping("doFindActivitys")
-	 public String doFindActivitys(Model model) {
-		 List<Activity> list=activityService.findActivitys();
-		 model.addAttribute("list", list);
-		 return "activity";
-	 }
+     @RequestMapping("doActivityUI")
+     public String doActivityUI() {
+    	 return "activity";
+     }
+     @RequestMapping("doFindActivitys")
+     @ResponseBody
+     public List<Activity> doFindActivitys() {
+    	 List<Activity> list=activityService.findActivitys();
+    	 return list;
+     }
+     
+//	 @RequestMapping("doFindActivitys")
+//	 public String doFindActivitys(Model model) {
+//		 List<Activity> list=activityService.findActivitys();
+//		 model.addAttribute("list", list);
+//		 return "activity";
+//	 }
+     
+     
+     
 }
+
+
+
+
+
