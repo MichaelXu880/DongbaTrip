@@ -34,6 +34,7 @@ public class Activity {
 	private Date endTime;
 	private int state=1;
 	private String remark;
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm")//getStartTime
 	private Date createdTime;
 	private String createdUser;
 	

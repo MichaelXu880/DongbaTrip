@@ -31,10 +31,9 @@ public class ActivityController {
      }
      
      @RequestMapping("doSaveActivity")
-     @ResponseBody
-     public String doSaveActivity(Activity entity) {
-    	 activityService.saveActivity(entity);
-    	 return "save ok";
+     @ResponseBody //spring mvc 会将返回的对象转换为json格式字符串
+     public Activity doSaveActivity(Activity entity) {
+    	 return activityService.saveActivity(entity);
      }
      
      @RequestMapping("doActivityEditUI")

@@ -6,6 +6,6 @@ public interface ActivityService {
 	   
 	   Activity findById(Integer id);
 	   int deleteById(Integer id);
-	   int saveActivity(Activity entity);
+	   Activity saveActivity(Activity entity);
 	   List<Activity> findActivitys();
 }

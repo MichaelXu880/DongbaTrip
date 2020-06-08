@@ -1,5 +1,6 @@
 package com.cy.pj.activity.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,16 @@ public class ActivityServiceImpl implements ActivityService {
 		
 	}
 	@Override
-	public int saveActivity(Activity entity) {
+	public Activity saveActivity(Activity entity) {
 		if(entity.getId()==null) {
-		  return activityDao.insertActivity(entity);
+		   entity.setCreatedTime(new Date());
+		   System.out.println("insert.before="+entity);
+		   activityDao.insertActivity(entity);
+		   System.out.println("insert.after="+entity);
 		}else {
-		  return activityDao.updateActivity(entity);
+		   activityDao.updateActivity(entity);
 		}
+		return entity;
 	}
 	
 	@Override
