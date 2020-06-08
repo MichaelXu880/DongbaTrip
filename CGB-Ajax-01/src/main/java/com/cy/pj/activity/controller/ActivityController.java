@@ -18,11 +18,16 @@ public class ActivityController {
 	 private ActivityService activityService;
      
      @RequestMapping("doFindById")
-     public String doFindById(Integer id,Model model) {
-    	 Activity aty=activityService.findById(id);
-    	 model.addAttribute("aty", aty);
-    	 return "forward:doFindActivitys";
+     @ResponseBody
+     public Activity doFindById(Integer id) {
+    	 return activityService.findById(id);
      }
+//     @RequestMapping("doFindById")
+//     public String doFindById(Integer id,Model model) {
+//    	 Activity aty=activityService.findById(id);
+//    	 model.addAttribute("aty", aty);
+//    	 return "forward:doFindActivitys";
+//     }
      
      @RequestMapping("doDeleteById")
      @ResponseBody
