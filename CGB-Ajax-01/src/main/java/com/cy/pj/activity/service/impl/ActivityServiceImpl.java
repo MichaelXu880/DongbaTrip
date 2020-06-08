@@ -21,8 +21,8 @@ public class ActivityServiceImpl implements ActivityService {
 	
 	@Override
 	public int deleteById(Integer id) {
-		//System.out.println();
-		// TODO Auto-generated method stub
+		//try{Thread.sleep(5000);}
+		//catch (Exception e) {e.printStackTrace();}
 		return activityDao.deleteById(id);
 		
 	}

@@ -12,9 +12,6 @@
 	    <h1>The Activity Page</h1>
 		<div>
 			<button type="button" class="btn btn-primary"
-			onclick="javascript:location.href='doActivityEditUI'">普通方式添加</button>
-
-			<button type="button" class="btn btn-primary"
 				data-toggle="modal" onclick="doShowAddDialog()">模态框方式添加</button>
 		</div>
 		<div>
@@ -41,7 +38,7 @@
 						<td th:text="${a.state}"></td>
 						<td th:text="${#dates.format(a.createdTime, 'yyyy/MM/dd HH:mm')}"></td>
 						<td>
-						<button class="btn btn-danger btn-sm" th:onclick="doDeleteById([[${a.id}]])">删除</button>
+						<button class="btn btn-danger btn-sm" th:id="${a.id}" th:onclick="doDeleteById([[${a.id}]])">删除</button>
 						<button class="btn btn-warning btn-sm" th:onclick="doLoadById([[${a.id}]])">更新</button>
 						</td>
 					</tr>
@@ -62,7 +59,7 @@
 					<h4 class="modal-title" id="myModalLabel">Modal title</h4>
 				</div>
 				<div class="modal-body">
-					<form id="atyFormId" class="form-horizontal" action="doSaveActivity" method="post">
+					<form id="atyFormId" class="form-horizontal">
 						<input type="hidden" name="id" id="atyId">
 						<div class="form-group">
 							<label for="titleId" class="col-sm-2 control-label">title</label>
@@ -147,13 +144,22 @@
 	    	 location.href="doFindById?id="+id;
 	     }
 	     function doSaveActivity(){
-		    	// alert("save activity");
-		    	//对表单内容进行校验
-		    	//执行表单提交操作(基于js方式提交表单)
-		    	$("#atyFormId").submit();
-		    	//关闭模态框
-		    	$('#myModal').modal('hide');
-		     }
+	    	    //1.获取表单数据
+	    	    var title=$("#titleId").val();
+        	    var category=$("#categoryId").val();
+        	    var startTime=$("#startTimeId").val();
+        	    var endTime=$("#endTimeId").val();
+        	    var remark=$("#remarkId").text();
+        	    var params="title="+title+"&category="+category+"&startTime="+startTime+"&endTime="+endTime+"&remark="+remark;
+	    	    //2.异步提交表单数据
+	    	    var url="doSaveActivity";
+	    	    doAjaxPost(url,params,function(result){
+	    	    	alert(result);
+	    	    	$('#myModal').modal('hide');
+	    	    	//刷新页面(两种方式：再次查询所有或者在当前页面在插入一行)
+	    	    });
+		 }
+	     
 	     //基于ajax方式执行删除操作
 	     function doDeleteById(id){
 	    	if(!confirm("确定删除吗"))return;
@@ -164,6 +170,9 @@
 		    doAjaxGet(url,params,function(result){
 		    	alert(result);
 		    	//思考刷新的方式?...
+		        var obj=$("#"+id);
+		    	console.log("obj",obj);
+		    	$("#"+id).parents("tr").remove();
 		    });
 	     }
 	     //基于此函数向服务端发起ajax Get请求
@@ -172,17 +181,35 @@
 	       	 var xhr=new XMLHttpRequest();
 	    	 //2.注册Xhr对象的状态监听函数
 	         xhr.onreadystatechange=function(){
-	       	    if(xhr.readyState==4&&xhr.status==200){
-	       	       callback(xhr.responseText);
+	       	    if(xhr.readyState==4){
+	       	       if(xhr.status==200){
+	       	        callback(xhr.responseText);
+	       	       }
 	       	    }
 	       	 }
 	    	 //3.创建一个连接
-	    	 xhr.open("GET",url+"?"+params,true)
+	    	 xhr.open("GET",url+"?"+params,true);//true表示异步执行
 	    	 //4.发送请求
 	    	 xhr.send(null)
 	     }
-	     
-
+	     function doAjaxPost(url,params,callback){
+	    	 //1.创建xhr对象
+	       	 var xhr=new XMLHttpRequest();
+	    	 //2.注册Xhr对象的状态监听函数
+	         xhr.onreadystatechange=function(){
+	       	    if(xhr.readyState==4){
+	       	       if(xhr.status==200){
+	       	        callback(xhr.responseText);
+	       	       }
+	       	    }
+	       	 }
+	    	 //3.创建一个连接
+	    	 xhr.open("POST",url,true);//true表示异步执行
+	    	 xhr.setRequestHeader("Content-Type",
+	         "application/x-www-form-urlencoded");
+	    	 //4.发送请求
+	    	 xhr.send(params)//post请求方式的参数需要写到send方法内部
+	     }
 	</script>
 </body>
 </html>

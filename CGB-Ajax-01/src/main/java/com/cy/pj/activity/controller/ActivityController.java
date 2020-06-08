@@ -31,9 +31,10 @@ public class ActivityController {
      }
      
      @RequestMapping("doSaveActivity")
+     @ResponseBody
      public String doSaveActivity(Activity entity) {
     	 activityService.saveActivity(entity);
-    	 return "redirect:doFindActivitys";
+    	 return "save ok";
      }
      
      @RequestMapping("doActivityEditUI")
