@@ -50,8 +50,8 @@ public class ActivityController {
      
      @RequestMapping("activity.html")
      public String doActivityUI() {
-    	 //return "activity-ajax";//传统ajax方式的异步实现
-    	 return "activity-jquery-ajax";//基于jquery中的ajax函数进行异步操作
+    	 return "activity-ajax";//传统ajax方式的异步实现
+    	 //return "activity-jquery-ajax";//基于jquery中的ajax函数进行异步操作
      }
      @RequestMapping("jquery.html")
      public String doJQueryUI() {

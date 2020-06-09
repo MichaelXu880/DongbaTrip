@@ -47,11 +47,12 @@
     	  var params="";
     	  $.post(url,params,function(result){
     		  console.log("post",result)
-    	  });
+    	  });//post请求方式的ajax函数
       }
       function doLoad(){
     	  var url="doFindActivitys";
-    	  $("#container").load(url,function(){
+    	  //在id为container的位置加载url对应的资源
+    	  $("#container").load(url,function(){//加载完成以后回调此函数
     		  console.log("data load complete");
     	  });
       }
