@@ -10,7 +10,7 @@ function doGetActivitys(){
 	//2.定义params
 	var params="";
 	//3.发送异步请求获取数据并更新到页面上
-	doAjaxGet(url,params,function(result){//List<Activity>
+	Ajax.doAjaxGet(url,params,function(result){//List<Activity>
 		doHandleQueryResult(result);
 	})
 }
@@ -48,7 +48,7 @@ function doLoadById(id){
 	// location.href="doFindById?id="+id;
 	var url="doFindById";
 	var params="id="+id;
-	doAjaxGet(url,params,function(result){
+	Ajax.doAjaxGet(url,params,function(result){
 		var jsonObj=JSON.parse(result);
 		doInitEditFormData(jsonObj);
 	})
@@ -67,7 +67,7 @@ function doSaveActivity(){
 	var params="id="+id+"&title="+title+"&category="+category+"&startTime="+startTime+"&endTime="+endTime+"&remark="+remark;
 	console.log("params",params);
 	//3.发送异步请求
-	doAjaxPost(url,params,function(result){//--->Activity
+	Ajax.doAjaxPost(url,params,function(result){//--->Activity
 		console.log("result",result);
 		debugger
 		var jsonObj=JSON.parse(result);
@@ -113,7 +113,7 @@ function doDeleteById(id){
 	var url="doDeleteById";
 	var params="id="+id;
 	//var obj=$(this);
-	doAjaxGet(url,params,function(result){
+	Ajax.doAjaxGet(url,params,function(result){
 		alert(result);
 		//思考刷新的方式?...
 		var obj=$("#"+id);
