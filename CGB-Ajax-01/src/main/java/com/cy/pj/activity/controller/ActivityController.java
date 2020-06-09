@@ -55,6 +55,7 @@ public class ActivityController {
      @ResponseBody
      public List<Activity> doFindActivitys() {
     	 List<Activity> list=activityService.findActivitys();
+    	 
     	 return list;
      }
      
