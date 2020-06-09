@@ -47,15 +47,21 @@ public class ActivityController {
      public String doActivityEditUI() {
     	 return "activity_edit";
      }
-     @RequestMapping("doActivityUI")
+     
+     @RequestMapping("activity.html")
      public String doActivityUI() {
-    	 return "activity";
+    	 //return "activity-ajax";//传统ajax方式的异步实现
+    	 return "activity-jquery-ajax";//基于jquery中的ajax函数进行异步操作
      }
+     @RequestMapping("jquery.html")
+     public String doJQueryUI() {
+    	 return "jquery-ajax-function";
+     }
+     
      @RequestMapping("doFindActivitys")
      @ResponseBody
      public List<Activity> doFindActivitys() {
     	 List<Activity> list=activityService.findActivitys();
-    	 
     	 return list;
      }
      

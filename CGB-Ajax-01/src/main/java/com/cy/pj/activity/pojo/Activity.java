@@ -26,15 +26,15 @@ public class Activity {
 	private String title;
 	private String category;
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")//setStartTime
-	@JsonFormat(pattern = "yyyy/MM/dd HH:mm")//getStartTime
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm",timezone = "GMT+8")//getStartTime
 	private Date startTime;
 	
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
-	@JsonFormat(pattern = "yyyy/MM/dd HH:mm")
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm",timezone = "GMT+8")
 	private Date endTime;
 	private int state=1;
 	private String remark;
-	@JsonFormat(pattern = "yyyy/MM/dd HH:mm")//getStartTime
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm",timezone = "GMT+8")//getStartTime
 	private Date createdTime;
 	private String createdUser;
 	
