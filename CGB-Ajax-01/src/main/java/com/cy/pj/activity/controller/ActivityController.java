@@ -3,8 +3,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cy.pj.activity.pojo.Activity;
@@ -50,8 +53,8 @@ public class ActivityController {
      
      @RequestMapping("activity.html")
      public String doActivityUI() {
-    	 return "activity-ajax";//传统ajax方式的异步实现
-    	 //return "activity-jquery-ajax";//基于jquery中的ajax函数进行异步操作
+    	 //return "activity-ajax";//传统ajax方式的异步实现
+    	 return "activity-jquery-ajax";//基于jquery中的ajax函数进行异步操作
      }
      @RequestMapping("jquery.html")
      public String doJQueryUI() {
@@ -64,16 +67,7 @@ public class ActivityController {
     	 List<Activity> list=activityService.findActivitys();
     	 return list;
      }
-     
-//	 @RequestMapping("doFindActivitys")
-//	 public String doFindActivitys(Model model) {
-//		 List<Activity> list=activityService.findActivitys();
-//		 model.addAttribute("list", list);
-//		 return "activity";
-//	 }
-     
-     
-     
+      
 }
 
 

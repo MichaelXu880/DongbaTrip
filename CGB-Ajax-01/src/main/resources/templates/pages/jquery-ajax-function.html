@@ -37,8 +37,7 @@
       }
       function doGetJSON(){
     	  var url="doFindActivitys";
-    	  var params="";
-    	  $.getJSON(url,params,function(result){
+    	  $.getJSON(url,function(result){
     		  console.log("getJSON",result)
     	  });//get请求的ajax函数，固化了响应数据的类型
       }

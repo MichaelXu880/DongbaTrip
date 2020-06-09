@@ -16,7 +16,8 @@
 					if(xhr.readyState==4){
 						if(xhr.status==200){
 							console.log("xhr.responseText="+xhr.responseText);
-							callback(xhr.responseText);//xhr.responseText为服务端返回的数据
+							//var jsonObj=JSON.parse(xhr.responseText);
+							callback(xhr.responseText));//xhr.responseText为服务端返回的数据
 						}
 					}
 				}
