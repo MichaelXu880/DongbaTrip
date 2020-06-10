@@ -33,7 +33,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <![endif]-->
 
   <!-- Google Font -->
-
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -420,28 +419,14 @@ desired effect
 <!-- AdminLTE App -->
 <script th:src="@{dist/js/adminlte.min.js}"></script>
 <script type="text/javascript">
-      $(function(){//页面加载完成之后执行
-    	  doLoadUI("load-log-id","log/log_list");
-    	  doLoadUI("load-menu-id","menu/menu_list");
-    	  doLoadUI("load-role-id","role/role_list");
-    	  doLoadUI("load-dept-id","dept/dept_list");
-    	  doLoadUI("load-user-id","user/user_list");
-    	  doLoadUI("load-pwd-id","user/pwd_edit");
-      });
-      
-      function doLoadUI(id,url){
-    	  //var dom=document.getElementById(id);
-    	  //dom.onclick=function(){
-    		//  $("#mainContentId").load(url); 
-    	  //}
-    	  $("#"+id).click(function(){//事件处理函数
-    		  console.log("====");
-    		  //load函数为一个jquery中的ajax函数,其作用是将url对应的资源，异步加载到指定位置
-    		  //此处表示在mainContentId对应的对象位置异步加载url指定资源
-    		  $("#mainContentId").load(url); 
-    	  }) 
-      }
-      
+  $(function(){
+	 doLoadUI("load-log-id","log/log_list");
+  })
+  function doLoadUI(id,url){
+	  $("#"+id).click(function(){
+		 $("#mainContentId").load(url);  
+	  })
+  }
 </script>
 </body>
 </html>
