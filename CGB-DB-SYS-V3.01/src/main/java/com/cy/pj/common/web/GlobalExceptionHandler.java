@@ -28,8 +28,5 @@ public class GlobalExceptionHandler {
 		e.printStackTrace();
 		return new JsonResult(e);
 	}
-	//............`
-	
-	
 	
 }
