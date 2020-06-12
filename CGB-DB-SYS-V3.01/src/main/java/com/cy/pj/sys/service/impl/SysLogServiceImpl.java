@@ -13,13 +13,13 @@ import com.cy.pj.sys.service.SysLogService;
 
 @Service
 public class SysLogServiceImpl implements SysLogService {
-
+     
 	@Autowired
 	private SysLogDao sysLogDao;
 	
 	@Override
 	public PageObject<SysLog> findPageObjects(String username, 
-			Integer pageCurrent) {
+			Integer pageCurrent) throws ServiceException{
 		//1.参数校验(思考username允许为空吗？允许)
 		//请问如下参数校验是否可以颠倒"||"符号两侧的顺序？(不可以)
 		if(pageCurrent==null||pageCurrent<1)
@@ -37,8 +37,8 @@ public class SysLogServiceImpl implements SysLogService {
 		List<SysLog> records=
 		sysLogDao.findPageObjects(username, startIndex, pageSize);
 		//4.对业务层查询结果进行处理和封装
-		//注意PageObject构造方法传参的顺序由构造方法定义时参数的顺序决定
-		return new PageObject<>(records, rowCount, pageSize, pageCurrent);
+		//注意:PageObject构造方法传参的顺序由构造方法定义时参数的顺序决定
+		return new PageObject<>(records, rowCount,pageSize, pageCurrent);
 	}
 
 }

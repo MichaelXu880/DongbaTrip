@@ -29,7 +29,7 @@ public class PageObject<T> implements Serializable{
       private Integer pageSize;
       /**当前页的页码值*/
       private Integer pageCurrent;
-	  public PageObject(List<T> records, Integer rowCount, Integer pageSize, Integer pageCurrent) {
+	  public PageObject(List<T> records, Integer rowCount,Integer pageSize, Integer pageCurrent) {
 		super();
 		this.records = records;
 		this.rowCount = rowCount;
