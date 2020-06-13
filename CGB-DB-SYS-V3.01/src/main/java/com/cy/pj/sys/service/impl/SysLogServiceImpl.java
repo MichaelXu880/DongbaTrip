@@ -26,6 +26,7 @@ public class SysLogServiceImpl implements SysLogService {
 			throw new IllegalArgumentException("当前页码值不合法");
 		//2.查询总记录数，并进行校验
 		//假如在如下行出现空指针，可能问题的原因什么？sysLogDao变量为空
+		
 		int rowCount=sysLogDao.getRowCount(username);
 		if(rowCount==0)
             throw new ServiceException("没有对应记录");//此异常如何定义？

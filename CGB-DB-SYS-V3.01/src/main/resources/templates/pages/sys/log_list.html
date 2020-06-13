@@ -47,9 +47,7 @@
 	</div>
 </div>
 <script type="text/javascript">
- //JS 问题如何解决? console.log(),debugger,排除
- 
- 
+   //JS 问题如何解决? console.log(),debugger,排除
    $(function(){
 	//$("#pageId").load("doPageUI",doGetObjects);
 	  doGetObjects(); 
@@ -57,9 +55,9 @@
    //通过此函数异步加载服务端的日志信息
    function doGetObjects(){
 	 //1.定义请求参数
-	 var params="pageCurrent=1";
+	 let params="pageCurrent=1";
 	 //2.定义请求url
-	 var url="log/doFindPageObjects";
+	 const url="log/doFindPageObjects";
 	 //3.发送异步请求并处理响应结果
 	// $.getJSON(url,params,function(result){//JsonResult
 	//	 doHandleQueryResult(result);
@@ -67,21 +65,42 @@
 	 //也可以按照如下结构进行异步请求
 	 $.getJSON(url,params,doHandleQueryResult);
    }
-   function  doHandleQueryResult(result){//JsonResult
+   function doHandleQueryResult(result){//JsonResult
+	   //debugger
 	   //console.log("result",result);
 	   if(result.state==1){//正常数据
 		   //第一步:将当前页的日志记录信息更新到页面上
 		   //console.log(result.data.records)
 		   doSetTableBodyRows(result.data.records);
 		   //第二步:将分页信息更新到页面上
-		   //doSetPagination(result.data)
+		   doSetPagination(result.data);//-->PageObject
 	   }else{
 		   alert(result.message);
 	   }
    }
    function doSetTableBodyRows(records){//List<SysLog>
 	   //1.获取tbody对象并清空内容
+	   var tBody=$("#tbodyId");
+	   tBody.empty();
 	   //2.遍历records并将结果更新到页面上。
+	  //for(var i=0;i<records.length;i++){
+		   //1.构建一行tr对象
+		   //var tr=doCreateRow(records[i]);
+		   //2.将tr追加tbody中
+		   //tBody.append(tr);
+	  //}
+	   records.forEach(record=>tBody.append(doCreateRow(record)))
+   }
+   function doCreateRow(record){
+	   return `<tr>
+	            <td><input type='checkbox' value=${record.id}></td>
+	            <td>${record.username}</td>
+	            <td>${record.operation}</td>
+	            <td>${record.method}</td>
+	            <td>${record.params}</td>
+	            <td>${record.ip}</td>
+	            <td>${record.time}</td>
+	       </tr>`;
    }
 </script>
 
