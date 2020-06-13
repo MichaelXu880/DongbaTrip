@@ -18,7 +18,7 @@ public class SysLogServiceImpl implements SysLogService {
 	private SysLogDao sysLogDao;
 	
 	@Override
-	public PageObject<SysLog> findPageObjects(String username, 
+	public  PageObject<SysLog> findPageObjects(String username, 
 			Integer pageCurrent) throws ServiceException{
 		//1.参数校验(思考username允许为空吗？允许)
 		//请问如下参数校验是否可以颠倒"||"符号两侧的顺序？(不可以)
