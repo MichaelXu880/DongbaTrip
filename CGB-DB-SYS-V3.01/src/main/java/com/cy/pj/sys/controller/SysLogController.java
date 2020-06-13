@@ -1,5 +1,7 @@
 package com.cy.pj.sys.controller;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,6 +19,16 @@ public class SysLogController {
 
 	@Autowired
 	private SysLogService sysLogService;
+	
+	
+	@RequestMapping("doDeleteObjects")
+	@ResponseBody
+	public JsonResult doDeleteObjects(Integer...ids) {
+		System.out.println(Arrays.toString(ids));
+		//调用业务层方法执行删除业务
+		//????????
+		return new JsonResult("delete ok");
+	}
 	
 	@RequestMapping("doFindPageObjects")
 	@ResponseBody
