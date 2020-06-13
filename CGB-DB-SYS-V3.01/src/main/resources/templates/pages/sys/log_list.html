@@ -50,15 +50,32 @@
    //JS 问题如何解决? console.log(),debugger,排除
    $(function(){
 	//$("#pageId").load("doPageUI",doGetObjects);
-	  debugger
+	  //debugger
 	  doGetObjects(); 
+	 
+	  //事件注册
+	  $(".input-group-btn")
+	  .on("click",".btn-search",doQueryObjects);
    })
+   //基于参数查询日志信息
+   function doQueryObjects(){
+	   //初始化当前页码值
+	   $("#pageId").data("pageCurrent",1);
+	   //执行查询
+       doGetObjects();
+   }
    //通过此函数异步加载服务端的日志信息
    function doGetObjects(){
 	 //1.定义请求参数
 	 var pageCurrent=$("#pageId").data("pageCurrent");
 	 if(!pageCurrent)pageCurrent=1;
-	 let params="pageCurrent="+pageCurrent;
+	 var uname=$("#searchNameId").val();
+	 //参数封装：方法1
+	 //let params="pageCurrent="+pageCurrent;
+	 //if(uname)params=params+"&username="+uname;
+	 //参数封装：方法2
+	 let params={"pageCurrent":pageCurrent};
+	 if(uname)params.username=uname;
 	 //2.定义请求url
 	 const url="log/doFindPageObjects";
 	 //3.发送异步请求并处理响应结果
