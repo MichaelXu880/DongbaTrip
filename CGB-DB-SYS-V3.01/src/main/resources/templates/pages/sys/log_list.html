@@ -55,7 +55,9 @@
    //通过此函数异步加载服务端的日志信息
    function doGetObjects(){
 	 //1.定义请求参数
-	 let params="pageCurrent=1";
+	 var pageCurrent=$("#pageId").data("pageCurrent");
+	 if(!pageCurrent)pageCurrent=1;
+	 let params="pageCurrent="+pageCurrent;
 	 //2.定义请求url
 	 const url="log/doFindPageObjects";
 	 //3.发送异步请求并处理响应结果
@@ -73,7 +75,7 @@
 		   //console.log(result.data.records)
 		   doSetTableBodyRows(result.data.records);
 		   //第二步:将分页信息更新到页面上
-		   doSetPagination(result.data);//-->PageObject
+		   doSetPagination(result.data);
 	   }else{
 		   alert(result.message);
 	   }
