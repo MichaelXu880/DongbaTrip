@@ -45,7 +45,7 @@ public class SysLogServiceImpl implements SysLogService {
             throw new ServiceException("没有对应记录");//此异常如何定义？
 		//3.查询当前页记录
 		//定义每页最多要显示的记录数
-		int pageSize=3;
+		int pageSize=50;
 		//计算当前页查询的起始位置
 		int startIndex=(pageCurrent-1)*pageSize;
 		List<SysLog> records=
