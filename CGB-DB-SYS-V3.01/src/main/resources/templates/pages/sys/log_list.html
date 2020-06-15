@@ -75,7 +75,7 @@
 	   //1.获取选中记录id
 	   var idArray=doGetCheckedIds();//通过此函数返回一个数组，数组中存储的是选中的记录id
 	   if(idArray.length==0){
-		   alert("请线选择");
+		   alert("请先选择");
 		   return;
 	   }
 	   if(!confirm("确认删除吗"))return;
@@ -86,16 +86,15 @@
 	   //4.发送异步请求执行删除操作，并刷新页面
 	   $.post(url,params,doHandleDeleteResult)
    }
+   //处理删除结果
    function doHandleDeleteResult(result){
 	   if(result.state==1){
 		   alert(result.message);
-		   doGetObjects();
+		   doGetObjects();//刷新
 	   }else{
 		   alert(result.message);
 	   }
    }
-   
-   
    //基于参数查询日志信息
    function doQueryObjects(){
 	   //初始化当前页码值
@@ -122,7 +121,7 @@
 	//	 doHandleQueryResult(result);
 	 //});
 	 //也可以按照如下结构进行异步请求
-	 $.getJSON(url,params,doHandleQueryResult);
+	 $.getJSON(url,params,doHandleQueryResult)
    }
    function doHandleQueryResult(result){//JsonResult
 	   //debugger

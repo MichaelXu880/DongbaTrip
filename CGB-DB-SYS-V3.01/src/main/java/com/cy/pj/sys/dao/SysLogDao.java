@@ -1,10 +1,11 @@
 package com.cy.pj.sys.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.cy.pj.sys.entity.*;
-import java.util.*;
+import com.cy.pj.sys.entity.SysLog;
 /**
  * 日志模块数据层接口：定义数据访问规范
  */
