@@ -18,6 +18,19 @@ public class SysLogServiceImpl implements SysLogService {
 	private SysLogDao sysLogDao;
 	
 	@Override
+	public int deleteObjects(Integer... ids) {
+		//1.参数校验
+		if(ids==null||ids.length==0)
+			throw new IllegalArgumentException("参数值无效");
+		//2.执行删除操作
+		int rows=sysLogDao.deleteObjects(ids);
+		//3.验证删除结果
+		if(rows==0)
+			throw new ServiceException("记录可能不存在了");
+		return rows;
+	}
+	
+	@Override
 	public  PageObject<SysLog> findPageObjects(String username, 
 			Integer pageCurrent) throws ServiceException{
 		//1.参数校验(思考username允许为空吗？允许)

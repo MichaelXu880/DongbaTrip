@@ -1,6 +1,8 @@
 package com.cy.pj.sys.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
 import com.cy.pj.sys.entity.*;
 import java.util.*;
 /**
@@ -8,6 +10,15 @@ import java.util.*;
  */
 @Mapper
 public interface SysLogDao {
+	
+	 /**
+	  * 基于多个id删除日志信息
+	  * @param ids 日志记录id，假如没有使用这个@Params注解进行参数描述，
+	  * 对于可变参数而言，在映射sql中接收此值时需要使用array。
+	  * @return
+	  */
+	 int deleteObjects(@Param("ids") Integer...ids);
+	 
      /**
       * 基于查询条件统计记录总数
       * @param username 查询条件

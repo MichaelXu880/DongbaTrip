@@ -20,13 +20,12 @@ public class SysLogController {
 	@Autowired
 	private SysLogService sysLogService;
 	
-	
 	@RequestMapping("doDeleteObjects")
 	@ResponseBody
 	public JsonResult doDeleteObjects(Integer...ids) {
 		System.out.println(Arrays.toString(ids));
 		//调用业务层方法执行删除业务
-		//????????
+		sysLogService.deleteObjects(ids);
 		return new JsonResult("delete ok");
 	}
 	

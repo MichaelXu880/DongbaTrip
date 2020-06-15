@@ -9,6 +9,13 @@ import java.util.*;
  * 3)添加日志业务(学了AOP再实现)
  */
 public interface SysLogService {//SysLogService为实现类
+	/**
+	 * 基于日志记录id执行删除操作
+	 * @param ids
+	 * @return
+	 */
+	int deleteObjects(Integer...ids);
+	
      /**
       * 定义日志的分页查询业务
       * @param username 用户名(数据最终来源为client)
