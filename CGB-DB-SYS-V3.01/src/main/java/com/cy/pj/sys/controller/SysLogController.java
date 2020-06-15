@@ -7,13 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.cy.pj.common.bo.PageObject;
 import com.cy.pj.common.vo.JsonResult;
 import com.cy.pj.sys.entity.SysLog;
 import com.cy.pj.sys.service.SysLogService;
 
-@Controller
+@RestController
 @RequestMapping("/log/")
 public class SysLogController {
 
@@ -21,7 +22,7 @@ public class SysLogController {
 	private SysLogService sysLogService;
 	
 	@RequestMapping("doDeleteObjects")
-	@ResponseBody
+	//@ResponseBody
 	public JsonResult doDeleteObjects(Integer...ids) {
 		System.out.println(Arrays.toString(ids));
 		//调用业务层方法执行删除业务
@@ -30,7 +31,7 @@ public class SysLogController {
 	}
 	
 	@RequestMapping("doFindPageObjects")
-	@ResponseBody
+	//@ResponseBody
 	public JsonResult doFindPageObjects(String username,
 			Integer pageCurrent){
 		PageObject<SysLog> pageObject=
