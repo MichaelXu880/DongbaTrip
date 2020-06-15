@@ -11,38 +11,14 @@ import org.springframework.context.ApplicationContext;
  */
 @SpringBootTest
 public class DefaultCacheTests {
-	/**
-	 * 此对象为spring框架中的一个场景对象，此对象支持
-	 * 1)bean 对象作用域的设置(不同作用域的对象会对应不同的池)
-	 * 2)国际化操作
-	 * 3).....
-	 */
-	@Autowired
-	private ApplicationContext applicationContext;
-     /**
-      * @Autowired 描述属性时，spring框架会按照一定的规则为属性赋值。
-      * 1)首先进行查找(从spring 容器中查找匹配对象-依赖查找),当找不到时
-      *   会出现NoSuchBeanDefinition
-      * 2)通过反射为属性赋值(依赖注入)
-      */
-	 //has a
 	 @Autowired
-	 private DefaultCache defaultCache01;
+	 private DefaultCache defaultCache;
 	 
-	 @Autowired
-	 private DefaultCache defaultCache02;
-	
 	 @Test
 	 void testDefaultCache() {
-		 System.out.println(defaultCache01==defaultCache02);
+		 System.out.println(defaultCache);
 	 }
-	 
-	 @Test
-	 void testContainerBean() {
-		 DefaultCache defaultCache=
-		 applicationContext.getBean("defaultCache",DefaultCache.class);
-	     System.out.println(defaultCache);
-	 }
+
 }
 
 
