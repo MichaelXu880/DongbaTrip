@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="/ztree/jquery.ztree.all.min.js"></script>
+<script type="text/javascript">
+   var zTree;
+   var setting = {
+		  	data : {
+		  		simpleData : {
+		  			enable : true,//表示使用简单数据模式
+		  			idKey : "id",  //节点数据中保存唯一标识的属性名称
+		  			pIdKey : "parentId",  //节点数据中保存其父节点唯一标识的属性名称
+		  			rootPId : null  //根节点id
+		  		}//json 格式javascript对象
+		  	}
+   }
+   var data=[
+	          {id:1,name:"A",parentId:null},
+	          {id:2,name:"A1",parentId:1},
+	          {id:3,name:"A2",parentId:1},
+	          {id:4,name:"A3",parentId:1},
+	          {id:5,name:"B",parentId:null},
+	          {id:6,name:"B1",parentId:5},
+   ];
+   
+   $(function(){
+	   zTree = $.fn.zTree.init($("#treeDemo"), setting, data);
+    });
+</script>
+</head>
+<body>
+   <div>
+      <ul id="treeDemo" class="ztree"></ul>
+   </div>
+</body>
+</html>
