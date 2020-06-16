@@ -21,6 +21,13 @@ public class SysMenuServiceImpl implements SysMenuService {
 	private SysRoleMenuDao sysRoleMenuDao;
 	
 	@Override
+	public int updateObject(SysMenu entity) {
+		//1.参数校验
+		//2.将数据保存到数据库
+		int rows=sysMenuDao.updateObject(entity);
+		return rows;
+	}
+	@Override
 	public int saveObject(SysMenu entity) {
 		//1.参数校验
 		//2.将数据保存到数据库

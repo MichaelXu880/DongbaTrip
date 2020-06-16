@@ -17,12 +17,18 @@ public class SysMenuController {
 	@Autowired
 	private SysMenuService sysMenuService;
 	
+	@RequestMapping("doUpdateObject")
+	public JsonResult doUpdateObject(SysMenu entity) {
+		sysMenuService.updateObject(entity);
+		return new JsonResult("update ok");
+	}
+	
 	@RequestMapping("doSaveObject")
 	public JsonResult doSaveObject(SysMenu entity) {
 		sysMenuService.saveObject(entity);
 		return new JsonResult("save ok");
 	}
-	
+	//menu/doFindZtreeMenuNodes
 	@RequestMapping("doFindZtreeMenuNodes")
 	public JsonResult doFindZtreeMenuNodes() {
 		return new JsonResult(sysMenuService.findZTreeMenuNodes());

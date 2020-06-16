@@ -10,6 +10,7 @@ import com.cy.pj.sys.entity.SysMenu;
  */
 public interface SysMenuService {
 	
+	 int updateObject(SysMenu entity);
 	 int saveObject(SysMenu entity);
 	
 	 List<Node> findZTreeMenuNodes();

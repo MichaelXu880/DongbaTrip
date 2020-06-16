@@ -29,6 +29,7 @@ public class PageController {
 //		  System.out.println("==doMenuUI()==");
 //		  return "sys/menu_list";
 //	  }
+	  
 	  //rest风格(软件编码架构风格)的url定义
 	  //语法格式:/{a}/{b}/...;其中{}中的内容可以理解为一个变量
 	  //@PathVariable 注解可以描述方法参数，用于获取url中与方法参数相同的变量值

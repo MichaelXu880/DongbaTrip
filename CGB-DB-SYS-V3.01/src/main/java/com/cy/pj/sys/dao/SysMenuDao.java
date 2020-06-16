@@ -16,6 +16,12 @@ public interface SysMenuDao {//SysMenuMapper
 	 * @param entity
 	 * @return
 	 */
+	int updateObject(SysMenu entity);
+	/**
+	 * 将菜单信息写入到数据库
+	 * @param entity
+	 * @return
+	 */
 	 int insertObject(SysMenu entity);
 	 /**
 	  * 查询所有菜单的id,name,parentId信息
