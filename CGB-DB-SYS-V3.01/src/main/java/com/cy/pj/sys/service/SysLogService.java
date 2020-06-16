@@ -1,4 +1,5 @@
 package com.cy.pj.sys.service;
+import com.cy.pj.common.bo.Node;
 import com.cy.pj.common.bo.PageObject;
 import com.cy.pj.sys.entity.*;
 import java.util.*;
@@ -9,6 +10,8 @@ import java.util.*;
  * 3)添加日志业务(学了AOP再实现)
  */
 public interface SysLogService {//SysLogService为实现类
+	
+
 	/**
 	 * 基于日志记录id执行删除操作
 	 * @param ids

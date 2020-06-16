@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cy.pj.common.bo.Node;
 import com.cy.pj.common.bo.PageObject;
 import com.cy.pj.common.exception.ServiceException;
 import com.cy.pj.sys.dao.SysLogDao;
@@ -16,6 +17,7 @@ public class SysLogServiceImpl implements SysLogService {
      
 	@Autowired
 	private SysLogDao sysLogDao;
+
 	
 	@Override
 	public int deleteObjects(Integer... ids) {

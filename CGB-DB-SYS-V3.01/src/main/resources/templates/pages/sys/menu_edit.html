@@ -198,6 +198,7 @@
 	  var url="menu/doFindZtreeMenuNodes";
 	  //异步加载数据,并初始化数据
 	  $.getJSON(url,function(result){
+		  debugger
 		  if(result.state==1){
 			  //使用init函数需要先引入ztree对应的js文件
 			  zTree=$.fn.zTree.init(

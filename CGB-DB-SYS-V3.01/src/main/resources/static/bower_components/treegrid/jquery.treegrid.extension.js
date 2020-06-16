@@ -132,6 +132,7 @@
                 dataType : "JSON",
                 success : function(result, textStatus, jqXHR) {
                     // 加载完数据先清空
+                	//debugger
                     tbody.html("");
                     var data = result.data;
                     if(!data||data.length<=0){

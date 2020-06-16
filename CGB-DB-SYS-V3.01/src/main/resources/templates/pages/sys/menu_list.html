@@ -179,7 +179,7 @@ function doDeleteObject(){
 }
 function doGetObjects(){
 	//移除mainContentId位置的数据
-	$("#mainContentId").removeData();
+	$("#mainContentId").removeData();//data函数绑定
 	var treeTable=new TreeTable(
 				"menuTable",//tableId
 				"menu/doFindObjects",//url
