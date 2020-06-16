@@ -21,6 +21,14 @@ public class SysMenuServiceImpl implements SysMenuService {
 	private SysRoleMenuDao sysRoleMenuDao;
 	
 	@Override
+	public int saveObject(SysMenu entity) {
+		//1.参数校验
+		//2.将数据保存到数据库
+		int rows=sysMenuDao.insertObject(entity);
+		return rows;
+	}
+	
+	@Override
 	public List<Node> findZTreeMenuNodes() {
 		// TODO Auto-generated method stub
 		return sysMenuDao.findZTreeMenuNodes();

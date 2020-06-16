@@ -9,6 +9,9 @@ import com.cy.pj.sys.entity.SysMenu;
  * 此接口中定义菜单模块的业务操作标准
  */
 public interface SysMenuService {
+	
+	 int saveObject(SysMenu entity);
+	
 	 List<Node> findZTreeMenuNodes();
 	/**
 	 * 基于菜单id删除菜单信息以及菜单对应的关系数据

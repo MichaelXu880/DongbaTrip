@@ -11,6 +11,12 @@ import com.cy.pj.sys.entity.SysMenu;
 
 @Mapper
 public interface SysMenuDao {//SysMenuMapper
+	/**
+	 * 将菜单信息写入到数据库
+	 * @param entity
+	 * @return
+	 */
+	 int insertObject(SysMenu entity);
 	 /**
 	  * 查询所有菜单的id,name,parentId信息
 	  * @return
