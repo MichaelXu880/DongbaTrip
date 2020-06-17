@@ -15,6 +15,13 @@ public class SysRoleController {
      @Autowired
 	 private SysRoleService sysRoleService;
      
+     
+     @RequestMapping("doDeleteObject")
+     public JsonResult doDeleteObject(Integer id) {
+    	 sysRoleService.deleteObject(id);
+    	 return new JsonResult("delete ok");
+     }
+     
      @RequestMapping("doFindPageObjects")
      public JsonResult doFindPageObjects(String name,Integer pageCurrent) {
     	 PageObject<SysRole> pageObject=
