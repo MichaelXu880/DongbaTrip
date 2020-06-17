@@ -1,6 +1,8 @@
 package com.cy.pj.common.bo;//business object
 import java.io.Serializable;
 import java.util.*;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 /**
@@ -17,6 +19,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class PageObject<T> implements Serializable{
 	  private static final long serialVersionUID = 5727659641634783999L;
 	  /**当前页记录*/
@@ -43,4 +46,14 @@ public class PageObject<T> implements Serializable{
 		//计算分析：方案二
 		this.pageCount=(rowCount-1)/pageSize+1;
 	 }
+//	 public PageObject(List<T> records, Integer rowCount, Integer pageCount, Integer pageSize, Integer pageCurrent) {
+//		super();
+//		this.records = records;
+//		this.rowCount = rowCount;
+//		this.pageCount = pageCount;
+//		this.pageSize = pageSize;
+//		this.pageCurrent = pageCurrent;
+//	 }
+	 
+	 
 }
