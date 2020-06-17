@@ -10,6 +10,12 @@ import com.cy.pj.sys.entity.SysRole;
 @Mapper
 public interface SysRoleDao {
 	/**
+	 * 保存角色自身信息
+	 * @param entity
+	 * @return
+	 */
+	int insertObject(SysRole entity);
+	/**
 	 * 基于角色id删除角色自身信息
 	 * @param id
 	 * @return

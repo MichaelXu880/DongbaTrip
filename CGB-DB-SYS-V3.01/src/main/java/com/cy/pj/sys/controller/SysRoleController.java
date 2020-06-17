@@ -16,6 +16,13 @@ public class SysRoleController {
 	 private SysRoleService sysRoleService;
      
      
+     @RequestMapping("doSaveObject")
+     public JsonResult doSaveObject(SysRole entity,Integer[]menuIds) {
+    	 sysRoleService.saveObject(entity, menuIds);
+    	 return new JsonResult("save ok");
+     }
+     
+     
      @RequestMapping("doDeleteObject")
      public JsonResult doDeleteObject(Integer id) {
     	 sysRoleService.deleteObject(id);

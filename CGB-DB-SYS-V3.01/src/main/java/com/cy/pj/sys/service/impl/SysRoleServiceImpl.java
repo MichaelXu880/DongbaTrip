@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.cy.pj.common.bo.PageObject;
 import com.cy.pj.common.exception.ServiceException;
@@ -24,6 +25,23 @@ public class SysRoleServiceImpl implements SysRoleService {
 	private SysRoleMenuDao sysRoleMenuDao;
 	@Autowired
 	private SysUserRoleDao sysUserRoleDao;
+	
+	@Override
+	public int saveObject(SysRole entity, Integer[] menuIds) {
+		//1.参数校验
+		if(entity==null)
+			throw new IllegalArgumentException("保存对象不能为空");
+		if(StringUtils.isEmpty(entity.getName()))//StringUtils用的是spring框架的一个工具类
+			throw new IllegalArgumentException("角色名不允许为空");
+		if(menuIds==null||menuIds.length==0)
+			throw new IllegalArgumentException("需要为角色分配权限");
+		//2.保存角色自身信息
+		int rows=sysRoleDao.insertObject(entity);
+		//3.保存角色和菜单关系数据
+		sysRoleMenuDao.insertObjects(entity.getId(), menuIds);
+		return rows;
+	}
+	
 	@Override
 	public int deleteObject(Integer id) {
 		//1.参数校验
