@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * @Component 注解描述的类应该为由spring管理的一个对象
  * @author pc
  */
-//@Component
+@Component
 //singleton:单例作用域，默认作用域，此作用域的对象在内存中只有一份。
 //@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 //prototype:多例作用域，此作用域的对象spring容器不负责存储，只负责创建和初始化。
@@ -28,7 +28,7 @@ public class DefaultCache {//DefaultCache.class
 	//对象的生命周期:创建，初始化，服务，销毁
 	//设置对象生命周期初始化方法(会在对象构造方法执行之后执行)
 	@PostConstruct 
-	public void init() {
+	public  void init() {
 		System.out.println("==init()==");
 	}
 	//设置生命周期销毁方法(会在spring容器销毁对象之前执行)
