@@ -20,6 +20,11 @@ public class SysRoleController {
     	 return new JsonResult(sysRoleService.findObjectById(id));
      }
      
+     @RequestMapping("doUpdateObject")
+     public JsonResult doUpdateObject(SysRole entity,Integer[]menuIds) {
+    	 sysRoleService.updateObject(entity, menuIds);
+    	 return new JsonResult("update ok");
+     }
      @RequestMapping("doSaveObject")
      public JsonResult doSaveObject(SysRole entity,Integer[]menuIds) {
     	 sysRoleService.saveObject(entity, menuIds);

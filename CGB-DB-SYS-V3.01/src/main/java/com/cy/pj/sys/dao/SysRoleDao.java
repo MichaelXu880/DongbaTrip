@@ -16,8 +16,13 @@ public interface SysRoleDao {
 	 * @param id
 	 * @return
 	 */
-	@Select("select id,name,note from sys_roles where id=#{id}")
 	SysRoleMenu findObjectById(Integer id);
+	/**
+	 * 更新角色自身信息
+	 * @param entity
+	 * @return
+	 */
+	int updateObject(SysRole entity);
 	/**
 	 * 保存角色自身信息
 	 * @param entity

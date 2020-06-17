@@ -37,9 +37,9 @@ public class SysRoleServiceImpl implements SysRoleService {
 		//2.查询角色自身信息
 		SysRoleMenu rm=sysRoleDao.findObjectById(id);//id,name,note
 		//3.查询角色对应的菜单id
-		List<Integer> menuIds=sysRoleMenuDao.findMenuIdsByRoleId(id);
+		//List<Integer> menuIds=sysRoleMenuDao.findMenuIdsByRoleId(id);
 		//4.封装两次查询结果并返回
-		rm.setMenuIds(menuIds);
+		//rm.setMenuIds(menuIds);
 		return rm;
 	}
 	
@@ -55,6 +55,24 @@ public class SysRoleServiceImpl implements SysRoleService {
 		//2.保存角色自身信息
 		int rows=sysRoleDao.insertObject(entity);
 		//3.保存角色和菜单关系数据
+		sysRoleMenuDao.insertObjects(entity.getId(), menuIds);
+		return rows;
+	}
+	@Override
+	public int updateObject(SysRole entity, Integer[] menuIds) {
+		//1.参数校验
+		if(entity==null)
+			throw new IllegalArgumentException("保存对象不能为空");
+		if(StringUtils.isEmpty(entity.getName()))//StringUtils用的是spring框架的一个工具类
+			throw new IllegalArgumentException("角色名不允许为空");
+		if(menuIds==null||menuIds.length==0)
+			throw new IllegalArgumentException("需要为角色分配权限");
+		//2.更新角色自身信息
+		int rows=sysRoleDao.updateObject(entity);
+		//3.更新角色和菜单关系数据
+		//3.1删除原有关系数据
+		sysRoleMenuDao.deleteObjectsByRoleId(entity.getId());
+		//3.2添加新的关系数据
 		sysRoleMenuDao.insertObjects(entity.getId(), menuIds);
 		return rows;
 	}

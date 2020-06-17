@@ -8,6 +8,13 @@ public interface SysRoleService {
 	
 	SysRoleMenu findObjectById(Integer id);
 	/**
+	 * 更新角色以及角色和菜单关系数据
+	 * @param entity
+	 * @param menuIds
+	 * @return
+	 */
+	int updateObject(SysRole entity,Integer[]menuIds);
+	/**
 	 * 保存角色以及角色和菜单关系数据
 	 * @param entity
 	 * @param menuIds
