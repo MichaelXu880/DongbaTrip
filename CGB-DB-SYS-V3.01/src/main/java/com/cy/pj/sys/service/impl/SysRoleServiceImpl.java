@@ -1,6 +1,8 @@
 package com.cy.pj.sys.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import com.cy.pj.sys.dao.SysRoleDao;
 import com.cy.pj.sys.dao.SysRoleMenuDao;
 import com.cy.pj.sys.dao.SysUserRoleDao;
 import com.cy.pj.sys.entity.SysRole;
+import com.cy.pj.sys.entity.SysRoleMenu;
 import com.cy.pj.sys.service.SysRoleService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -25,6 +28,20 @@ public class SysRoleServiceImpl implements SysRoleService {
 	private SysRoleMenuDao sysRoleMenuDao;
 	@Autowired
 	private SysUserRoleDao sysUserRoleDao;
+	
+	@Override
+	public SysRoleMenu findObjectById(Integer id) {
+		//1.参数校验
+		if(id==null||id<1)
+			throw new IllegalArgumentException("id值无效");
+		//2.查询角色自身信息
+		SysRoleMenu rm=sysRoleDao.findObjectById(id);//id,name,note
+		//3.查询角色对应的菜单id
+		List<Integer> menuIds=sysRoleMenuDao.findMenuIdsByRoleId(id);
+		//4.封装两次查询结果并返回
+		rm.setMenuIds(menuIds);
+		return rm;
+	}
 	
 	@Override
 	public int saveObject(SysRole entity, Integer[] menuIds) {

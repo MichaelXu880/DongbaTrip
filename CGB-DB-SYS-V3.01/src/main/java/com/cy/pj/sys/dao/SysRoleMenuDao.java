@@ -1,10 +1,20 @@
 package com.cy.pj.sys.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface SysRoleMenuDao {
+	/**
+	 * 基于角色id查询角色对应的菜单id
+	 * @param id
+	 * @return
+	 */
+	@Select("select menu_id from sys_role_menus where role_id=#{id}")
+	List<Integer> findMenuIdsByRoleId(Integer id);
 	/**
 	 * 保存角色和菜单的关系数据
 	 * @param roleId

@@ -4,11 +4,20 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import com.cy.pj.sys.entity.SysRole;
+import com.cy.pj.sys.entity.SysRoleMenu;
 
 @Mapper
 public interface SysRoleDao {
+	/**
+	 * 基于id获取角色自身信息
+	 * @param id
+	 * @return
+	 */
+	@Select("select id,name,note from sys_roles where id=#{id}")
+	SysRoleMenu findObjectById(Integer id);
 	/**
 	 * 保存角色自身信息
 	 * @param entity
