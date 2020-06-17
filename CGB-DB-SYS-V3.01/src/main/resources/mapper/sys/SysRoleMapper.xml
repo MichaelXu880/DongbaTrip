@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.cy.pj.sys.dao.SysRoleDao">
+       
+       
+       <!-- 在mybatis中可以通过sql元素定义SQL共性内容 ,
+                        假如其它元素中用到此部分内容可以基于include元素进行包含-->
+       <sql id="queryWhereId">
+              from sys_roles
+              <where>
+               <if test="name!=null and name!=''">
+                 name like concat("%",#{name},"%")
+               </if>
+              </where>
+       </sql>
+       <select id="findPageObjects" 
+               resultType="com.cy.pj.sys.entity.SysRole">
+              select *
+              <include refid="queryWhereId"/>
+              order by createdTime desc
+       </select>
+       <!-- 
+       <select id="findPageObjects" 
+               resultType="com.cy.pj.sys.entity.SysRole">
+              select *
+              <include refid="queryWhereId"/>
+              order by createdTime desc
+              limit #{startIndex},#{pageSize}
+       </select>
+        -->
+       <!--
+       <select id="getRowCount" resultType="int">
+            select count(*)
+            <include refid="queryWhereId"/>
+       </select>
+       -->
+  
+  </mapper>
