@@ -10,6 +10,19 @@ import com.cy.pj.sys.entity.SysUserDept;
 
 @Mapper
 public interface SysUserDao {
+	/**
+	 * 获取用户以及用户对应的部门信息
+	 * @param id
+	 * @return
+	 */
+	SysUserDept findObjectById(Integer id);
+	
+	/**
+	 * 更新用户自身信息
+	 * @param entity
+	 * @return
+	 */
+	int updateObject(SysUser entity);
 	 /**
 	  * 保存用户自身信息
 	  * @param entity

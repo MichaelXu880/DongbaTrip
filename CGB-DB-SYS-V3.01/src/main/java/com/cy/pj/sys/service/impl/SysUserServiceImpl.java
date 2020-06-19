@@ -1,15 +1,19 @@
 package com.cy.pj.sys.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
 
 import com.cy.pj.common.bo.PageObject;
 import com.cy.pj.common.exception.ServiceException;
 import com.cy.pj.sys.dao.SysUserDao;
+import com.cy.pj.sys.dao.SysUserRoleDao;
 import com.cy.pj.sys.entity.SysUser;
 import com.cy.pj.sys.entity.SysUserDept;
 import com.cy.pj.sys.service.SysUserService;
@@ -20,12 +24,51 @@ import com.github.pagehelper.PageHelper;
 public class SysUserServiceImpl implements SysUserService {
 	@Autowired
     private SysUserDao sysUserDao;
+	@Autowired
+	private SysUserRoleDao sysUserRoleDao;
 	
+	@Override
+	public Map<String, Object> findObjectById(Integer id) {
+		//1.参数校验
+		//2.查询用户以及用户对应的部门信息
+		SysUserDept user=sysUserDao.findObjectById(id);
+		if(user==null)
+			throw new ServiceException("此用户可能不存在");
+		//3.查询用户对应的角色信息
+		List<Integer> roleIds=sysUserRoleDao.findRoleIdsByUserId(id);
+		//4.封装两次查询结果并返回
+		Map<String,Object> map=new HashMap<>();
+		map.put("user", user);
+		map.put("roleIds", roleIds);
+		return map;
+	}
+	
+	@Override
+	public int updateObject(SysUser entity, Integer[] roleIds) {
+		//1.参数校验
+		if(entity==null)
+			 throw new IllegalArgumentException("保存对象不能为空");
+		if(StringUtils.isEmpty(entity.getUsername()))
+			throw new IllegalArgumentException("用户名不能空");
+		if(roleIds==null||roleIds.length==0)
+			throw new IllegalArgumentException("必须为用户分配角色");
+		//.....
+		//2.将用户信息更新到数据库
+		int rows=sysUserDao.updateObject(entity);
+		//3.将用户对应的角色信息写入到数据库
+		//3.1删除原有关系数据
+		sysUserRoleDao.deleteObjectsByUserId(entity.getId());
+		//3.2添加新的关系数据
+		sysUserRoleDao.insertObjects(entity.getId(), roleIds);
+		if(rows==0)
+			throw new ServiceException("记录可能不存在了");
+		return rows;
+	}
 	@Override
 	public int saveObject(SysUser entity, Integer[] roleIds) {
 		//1.参数校验
 		if(entity==null)
-			 throw new IllegalArgumentException("保存对象不能为空");
+			throw new IllegalArgumentException("保存对象不能为空");
 		if(StringUtils.isEmpty(entity.getUsername()))
 			throw new IllegalArgumentException("用户名不能空");
 		if(StringUtils.isEmpty(entity.getPassword()))
@@ -34,10 +77,20 @@ public class SysUserServiceImpl implements SysUserService {
 			throw new IllegalArgumentException("必须为用户分配角色");
 		//.....
 		//2.对密码进行加密
-		DigestUtils.md5DigestAsHex(entity.getPassword().getBytes());
+		String salt=UUID.randomUUID().toString();
+		SimpleHash sh=new SimpleHash(
+				"MD5",//algorithmName算法名称
+				entity.getPassword(), //source要加密的密码
+				salt, //加密盐
+				1);//加密次数
+		String pwd=sh.toHex();
+		entity.setSalt(salt);
+		entity.setPassword(pwd);
 		//3.将用户信息写入到数据库
+		int rows=sysUserDao.insertObject(entity);
 		//4.将用户对应的角色信息写入到数据库
-		return 0;
+		sysUserRoleDao.insertObjects(entity.getId(), roleIds);
+		return rows;
 	}
 	
 	@Override
