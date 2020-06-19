@@ -5,10 +5,17 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
 
+import com.cy.pj.sys.entity.SysUser;
 import com.cy.pj.sys.entity.SysUserDept;
 
 @Mapper
 public interface SysUserDao {
+	 /**
+	  * 保存用户自身信息
+	  * @param entity
+	  * @return
+	  */
+	 int insertObject(SysUser entity);
      /**
       * 禁用或启用用户信息
       * @param id

@@ -12,8 +12,15 @@ import com.cy.pj.sys.service.SysRoleService;
 @RestController //@Controller+@ReponseBody
 @RequestMapping("/role/")
 public class SysRoleController {
-     @Autowired
+    
+	 @Autowired
 	 private SysRoleService sysRoleService;
+     
+     @RequestMapping("doFindRoles")
+     public JsonResult doFindRoles() {
+    	 
+    	 return new JsonResult(sysRoleService.findObjects());
+     }
      
      @RequestMapping("doFindObjectById")
      public JsonResult doFindObjectById(Integer id) {
@@ -25,12 +32,12 @@ public class SysRoleController {
     	 sysRoleService.updateObject(entity, menuIds);
     	 return new JsonResult("update ok");
      }
+     
      @RequestMapping("doSaveObject")
      public JsonResult doSaveObject(SysRole entity,Integer[]menuIds) {
     	 sysRoleService.saveObject(entity, menuIds);
     	 return new JsonResult("save ok");
      }
-     
      
      @RequestMapping("doDeleteObject")
      public JsonResult doDeleteObject(Integer id) {

@@ -3,6 +3,18 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.cy.pj.sys.dao.SysUserDao">
+  
+    <insert id="insertObject"
+          parameterType="com.cy.pj.sys.entity.SysUser"
+          useGeneratedKeys="true"
+          keyProperty="id">
+       insert into sys_users
+      (username,password,deptId,email,mobile,salt,valid,
+      createdTime,modifiedTime,createdUser,modifiedUser)
+      values
+      (#{username},#{password},#{deptId},#{email},#{mobile},#{salt},#{valid},
+      now(),now(),#{createdUser},#{modifiedUser}) 
+  </insert>
        <!-- resultMap元素用于实现mybatis框架中的高级映射 -->
        <resultMap type="com.cy.pj.sys.entity.SysUserDept"
                   id="sysUserDept">

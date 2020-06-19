@@ -6,11 +6,19 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import com.cy.pj.common.bo.CheckBox;
 import com.cy.pj.sys.entity.SysRole;
 import com.cy.pj.sys.entity.SysRoleMenu;
 
 @Mapper
 public interface SysRoleDao {
+	/**
+	 * 查询所有角色的id和名字
+	 * @return
+	 */
+	@Select("select id,name from sys_roles")
+	List<CheckBox> findObjects();
+	
 	/**
 	 * 基于id获取角色自身信息
 	 * @param id

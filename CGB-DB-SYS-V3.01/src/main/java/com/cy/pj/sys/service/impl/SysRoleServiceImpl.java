@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.cy.pj.common.bo.CheckBox;
 import com.cy.pj.common.bo.PageObject;
 import com.cy.pj.common.exception.ServiceException;
 import com.cy.pj.sys.dao.SysRoleDao;
@@ -28,6 +29,11 @@ public class SysRoleServiceImpl implements SysRoleService {
 	private SysRoleMenuDao sysRoleMenuDao;
 	@Autowired
 	private SysUserRoleDao sysUserRoleDao;
+	
+	@Override
+	public List<CheckBox> findObjects() {
+		return sysRoleDao.findObjects();
+	}
 	
 	@Override
 	public SysRoleMenu findObjectById(Integer id) {
