@@ -13,6 +13,12 @@ public class SysUserController {
      @Autowired
 	 private SysUserService sysUserService;
      
+     @RequestMapping("doValidById")
+     public JsonResult doValidById(Integer id,Integer valid) {
+    	 sysUserService.validById(id, valid);
+    	 return new JsonResult("update ok");
+     }
+     
      @RequestMapping("doFindPageObjects")
      public JsonResult doFindPageObjects(String username,Integer pageCurrent) {
     	 return new JsonResult(sysUserService.findPageObjects(username, pageCurrent));
