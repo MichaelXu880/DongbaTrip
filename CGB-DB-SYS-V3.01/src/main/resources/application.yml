@@ -11,6 +11,7 @@ spring:
     password: root
   thymeleaf: #thymeleaf
     prefix: classpath:/templates/pages/
+  aop:    proxy-target-class: false  #jdk Proxy (优先使用jdk，但目标类没有实现接口会考虑实用cglib)
 #mybatis
 mybatis:
   mapper-locations:

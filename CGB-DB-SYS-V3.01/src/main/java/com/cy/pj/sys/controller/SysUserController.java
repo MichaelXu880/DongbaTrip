@@ -1,6 +1,7 @@
 package com.cy.pj.sys.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +12,7 @@ import com.cy.pj.sys.service.SysUserService;
 @RestController
 @RequestMapping("/user/")
 public class SysUserController {
+	
      @Autowired
 	 private SysUserService sysUserService;
      

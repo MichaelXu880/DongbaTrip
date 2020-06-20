@@ -1,15 +1,12 @@
 package com.cy.pj.sys.service.impl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-
 import com.cy.pj.common.bo.PageObject;
 import com.cy.pj.common.exception.ServiceException;
 import com.cy.pj.sys.dao.SysUserDao;
@@ -20,14 +17,14 @@ import com.cy.pj.sys.service.SysUserService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 
-@Service
-public class SysUserServiceImpl implements SysUserService {
+@Service //spring容器存储bean时会以类名(首字母作为key),对象作为value存储到spring容器
+public  final class SysUserServiceImpl implements SysUserService{
 	@Autowired
     private SysUserDao sysUserDao;
 	@Autowired
 	private SysUserRoleDao sysUserRoleDao;
 	
-	@Override
+	//@Override
 	public Map<String, Object> findObjectById(Integer id) {
 		//1.参数校验
 		//2.查询用户以及用户对应的部门信息
@@ -43,7 +40,7 @@ public class SysUserServiceImpl implements SysUserService {
 		return map;
 	}
 	
-	@Override
+	//@Override
 	public int updateObject(SysUser entity, Integer[] roleIds) {
 		//1.参数校验
 		if(entity==null)
@@ -64,7 +61,7 @@ public class SysUserServiceImpl implements SysUserService {
 			throw new ServiceException("记录可能不存在了");
 		return rows;
 	}
-	@Override
+	//@Override
 	public int saveObject(SysUser entity, Integer[] roleIds) {
 		//1.参数校验
 		if(entity==null)
@@ -93,7 +90,7 @@ public class SysUserServiceImpl implements SysUserService {
 		return rows;
 	}
 	
-	@Override
+	//@Override
 	public int validById(Integer id, Integer valid) {
 	    //1.参数校验
 		if(id==null||id<1)
@@ -108,7 +105,7 @@ public class SysUserServiceImpl implements SysUserService {
 		return rows;
 	}
 	
-	@Override
+	//@Override
 	public PageObject<SysUserDept> findPageObjects(String username, Integer pageCurrent) {
 		//1.参数校验
 		if(pageCurrent==null||pageCurrent<1)

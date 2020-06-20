@@ -18,6 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 @Aspect
 @Component
 public class SysLogAspect {
+	//private static final Logger log=
+			//LoggerFactory.getLogger(SysLogAspect.class);
 	//bean(bean名称)为一个切入点表达式
 	@Pointcut("bean(sysUserServiceImpl)")
 	public void doLogPointCut() {}
@@ -38,6 +40,4 @@ public class SysLogAspect {
 		throw e;
 		}
 	}
-	
-
-}
+}//XxxController-->XxxService(XxxServiceImpl$$EnhancerXXX)--->Aspect-->XxxServiceImpl
