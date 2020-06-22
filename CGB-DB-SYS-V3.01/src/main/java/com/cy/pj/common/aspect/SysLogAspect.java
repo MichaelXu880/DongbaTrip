@@ -1,5 +1,6 @@
 package com.cy.pj.common.aspect;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Date;
 
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -27,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
  * 2.2)通过@Around等注解描述的方法为通知方法(此方法内部要实现扩展业务的织入)
  * @author qilei
  */
-@Order(2)
+//@Order(2)
 @Slf4j
 @Aspect
 @Component
@@ -57,6 +58,7 @@ public class SysLogAspect {
 		return result;
 		}catch(Throwable e) {
 		log.error("error {}",e.getMessage());
+		
 		throw e;
 		}
 	}
@@ -98,6 +100,10 @@ public class SysLogAspect {
 		userLog.setTime(time);
 		userLog.setCreatedTime(new Date());
 		//3.将用户行为信息写入到数据库
-		sysLogService.saveObject(userLog);
+		//new Thread() {
+			//public void run() {
+				sysLogService.saveObject(userLog);
+			//};
+		//}.start();
 	}
 }//XxxController-->XxxService(XxxServiceImpl$$EnhancerXXX)--->Aspect-->XxxServiceImpl

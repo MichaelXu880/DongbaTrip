@@ -12,6 +12,11 @@ spring:
   thymeleaf: #thymeleaf
     prefix: classpath:/templates/pages/
   aop:    proxy-target-class: false  #jdk Proxy (优先使用jdk，但目标类没有实现接口会考虑实用cglib)
+  task:    execution:      pool:        core-size: 5 
+        max-size: 128
+        queue-capacity: 128
+        keep-alive: 60000
+      thread-name-prefix: DB-SERVICE-THREAD-
 #mybatis
 mybatis:
   mapper-locations:

@@ -1,11 +1,10 @@
 package com.cy.pj.sys.service.impl;
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
-import com.cy.pj.common.bo.Node;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import com.cy.pj.common.bo.PageObject;
 import com.cy.pj.common.exception.ServiceException;
 import com.cy.pj.sys.dao.SysLogDao;
@@ -18,8 +17,18 @@ public class SysLogServiceImpl implements SysLogService {
 	@Autowired
 	private SysLogDao sysLogDao;
 
+	//这里异步写日志操作，同样使用的是AOP
+	//@Async描述的方法为切入点
+	//这个切入点上执行的异步操作为通知(Advice)
+	@Async //由此注解描述的方法，用于告诉spring框架这个方法要运行一个异步线程上(此线程由spring线程池提供)。
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	@Override
 	public void saveObject(SysLog entity) {
+		//获取线程名称
+		String tName=Thread.currentThread().getName();
+		System.out.println("SysLogServiceImpl.saveObject.thread-->"+tName);
+		//模拟耗时操作
+		try{Thread.sleep(5000);}catch(Exception e) {}
 		sysLogDao.insertObject(entity);
 	}
 	

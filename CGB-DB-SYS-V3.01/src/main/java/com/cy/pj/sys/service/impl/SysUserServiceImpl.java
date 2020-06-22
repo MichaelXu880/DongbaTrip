@@ -6,6 +6,9 @@ import java.util.UUID;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.cy.pj.common.annotation.RequiredLog;
@@ -19,13 +22,20 @@ import com.cy.pj.sys.service.SysUserService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 
+@Transactional(timeout = 60,
+               isolation = Isolation.READ_COMMITTED,
+               readOnly = false,
+               rollbackFor = Throwable.class,
+               propagation = Propagation.REQUIRED)
 @Service //spring容器存储bean时会以类名(首字母作为key),对象作为value存储到spring容器
-public  final class SysUserServiceImpl implements SysUserService{
+public  class SysUserServiceImpl implements SysUserService{
 	@Autowired
     private SysUserDao sysUserDao;
+	
 	@Autowired
 	private SysUserRoleDao sysUserRoleDao;
 	
+	@Transactional(readOnly = true)
 	//@Override
 	public Map<String, Object> findObjectById(Integer id) {
 		//1.参数校验
@@ -106,10 +116,12 @@ public  final class SysUserServiceImpl implements SysUserService{
 			throw new ServiceException("记录可能已经不存在");
 		return rows;
 	}
-	
+	@Transactional(readOnly = true)//readOnly事务中不允许执行更新操作
 	@RequiredLog(operation = "分页查询")
 	//@Override
 	public PageObject<SysUserDept> findPageObjects(String username, Integer pageCurrent) {
+		String tName=Thread.currentThread().getName();
+		System.out.println("SysUserService.findPageObjects.thread-->"+tName);
 		//1.参数校验
 		if(pageCurrent==null||pageCurrent<1)
 			throw new IllegalArgumentException("页码值无效");
