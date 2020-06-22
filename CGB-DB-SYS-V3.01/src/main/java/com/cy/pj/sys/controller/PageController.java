@@ -35,7 +35,7 @@ public class PageController {
 	  //@PathVariable 注解可以描述方法参数，用于获取url中与方法参数相同的变量值
 	  @RequestMapping("/{module}/{moduleUI}")
 	  public String doModuleUI(@PathVariable String moduleUI) {
-		  System.out.println("==doModuleUI()==");
+		  //System.out.println("==doModuleUI()==");
 		  return "sys/"+moduleUI;
 	  }
 }

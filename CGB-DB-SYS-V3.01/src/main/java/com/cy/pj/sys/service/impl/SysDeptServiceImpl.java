@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.cy.pj.common.aspect.RequiredCache;
 import com.cy.pj.common.bo.Node;
 import com.cy.pj.common.exception.ServiceException;
 import com.cy.pj.sys.dao.SysDeptDao;
@@ -17,8 +19,11 @@ import com.cy.pj.sys.service.SysDeptService;
 public class SysDeptServiceImpl implements SysDeptService {
 	@Autowired
 	private SysDeptDao sysDeptDao;
+	
+	@RequiredCache
 	@Override
 	public List<Map<String, Object>> findObjects() {
+		System.out.println("===DeptService.findObjects()===");
 		List<Map<String, Object>> list=
 		sysDeptDao.findObjects();
 		if(list==null||list.size()==0)
