@@ -3,10 +3,12 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
 /**
+ * AOP编程入门
  * 定义切面对象类型，其特点:
  * 1)使用@Aspect注解修饰
  * 2)切面内部包含切入点和通知的定义
@@ -14,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
  * 2.2)通过@Around等注解描述的方法为通知方法(此方法内部要实现扩展业务的织入)
  * @author qilei
  */
+@Order(2)
 @Slf4j
 @Aspect
 @Component
@@ -30,6 +33,7 @@ public class SysLogAspect {
 	 */
 	@Around("doLogPointCut()")
 	public Object doAround(ProceedingJoinPoint jp) throws Throwable {
+		System.out.println("SysLogAspect.doAround");
 		log.info("start {}",System.currentTimeMillis());
 		try {
 		Object result=jp.proceed();//调用逻辑:本类中其它通知-->其它切面-->还有目标方法

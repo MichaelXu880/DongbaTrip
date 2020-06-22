@@ -9,8 +9,13 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
+/**
+ * 在此切面中讲解各种通知的执行顺序
+ * @author qilei
+ */
+@Order(1)
 @Aspect
 @Component
 public class SysTimeAspect {
@@ -21,7 +26,7 @@ public class SysTimeAspect {
 	@Around("doTime()")
 	public Object doAround(ProceedingJoinPoint pj) throws Throwable {
 		try {
-			System.out.println("doAround.before");
+			System.out.println("SysTimeAspect.doAround.before");
 			Object result = pj.proceed();
 			System.out.println("doAround.after");
 			return result;

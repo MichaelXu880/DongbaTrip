@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.cy.pj.common.aspect.RequiredCache;
+import com.cy.pj.common.annotation.ClearCache;
+import com.cy.pj.common.annotation.RequiredCache;
 import com.cy.pj.common.bo.Node;
+import com.cy.pj.common.cache.DefaultMapCache;
 import com.cy.pj.common.exception.ServiceException;
 import com.cy.pj.sys.dao.SysDeptDao;
 import com.cy.pj.sys.entity.SysDept;
@@ -38,6 +40,7 @@ public class SysDeptServiceImpl implements SysDeptService {
 		throw new ServiceException("没有部门信息");
 		return list;
 	}
+	@ClearCache
 	@Override
 	public int updateObject(SysDept entity) {
 		//1.合法验证
@@ -56,7 +59,7 @@ public class SysDeptServiceImpl implements SysDeptService {
 		//3.返回数据
 		return rows;
 	}
-	
+	@ClearCache
 	@Override
 	public int saveObject(SysDept entity) {
 		//1.合法验证
@@ -71,6 +74,7 @@ public class SysDeptServiceImpl implements SysDeptService {
 		//3.返回数据
 		return rows;
 	}
+	@ClearCache
 	@Override
 	public int deleteObject(Integer id) {
 		//1.合法性验证

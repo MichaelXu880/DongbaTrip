@@ -1,4 +1,4 @@
-package com.cy.pj.common.aspect;
+package com.cy.pj.common.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

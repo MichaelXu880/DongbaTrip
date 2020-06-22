@@ -1,6 +1,7 @@
 package com.cy.pj.common.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -12,13 +13,22 @@ import com.cy.pj.common.cache.DefaultMapCache;
 @Component
 @Aspect
 public class SysCacheAspect {
+	
 	  @Autowired
 	  private DefaultMapCache mapCache;
       /**
        * 定义切入点:由RequiredCache注解描述的方法为切入点方法
        */
-	  @Pointcut("@annotation(com.cy.pj.common.aspect.RequiredCache)")
+	  @Pointcut("@annotation(com.cy.pj.common.annotation.RequiredCache)")
 	  public void doCache() {}
+	  
+	  @Pointcut("@annotation(com.cy.pj.common.annotation.ClearCache)")
+	  public void doClear() {}
+	  
+	  @AfterReturning("doClear()")
+	  public void doAfterReturning() {
+		  mapCache.clear();
+	  }
 	  
 	  @Around("doCache()")
 	  public Object doAround(ProceedingJoinPoint jp)throws Throwable {
