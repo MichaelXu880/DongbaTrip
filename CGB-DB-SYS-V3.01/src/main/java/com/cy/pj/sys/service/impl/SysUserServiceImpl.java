@@ -7,6 +7,8 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import com.cy.pj.common.annotation.RequiredLog;
 import com.cy.pj.common.bo.PageObject;
 import com.cy.pj.common.exception.ServiceException;
 import com.cy.pj.sys.dao.SysUserDao;
@@ -105,6 +107,7 @@ public  final class SysUserServiceImpl implements SysUserService{
 		return rows;
 	}
 	
+	@RequiredLog(operation = "分页查询")
 	//@Override
 	public PageObject<SysUserDept> findPageObjects(String username, Integer pageCurrent) {
 		//1.参数校验

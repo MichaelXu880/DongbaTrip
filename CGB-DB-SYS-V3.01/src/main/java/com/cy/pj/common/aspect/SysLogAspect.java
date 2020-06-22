@@ -1,16 +1,21 @@
 package com.cy.pj.common.aspect;
+import java.lang.reflect.Method;
 import java.util.Date;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import com.cy.pj.common.annotation.RequiredLog;
+import com.cy.pj.common.utils.IPUtils;
 import com.cy.pj.sys.entity.SysLog;
 import com.cy.pj.sys.service.SysLogService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 /**
@@ -30,7 +35,8 @@ public class SysLogAspect {
 	//private static final Logger log=
 			//LoggerFactory.getLogger(SysLogAspect.class);
 	//bean(bean名称)为一个切入点表达式
-	@Pointcut("bean(sysUserServiceImpl)")
+	//@Pointcut("bean(sysUserServiceImpl)")
+	@Pointcut("@annotation(com.cy.pj.common.annotation.RequiredLog)")
 	public void doLogPointCut() {}
 	/**
 	 * 环绕通知方法(这个内部可以在目标方法执行之前，之后添加扩展业务逻辑)
@@ -57,13 +63,31 @@ public class SysLogAspect {
 	@Autowired
 	private SysLogService sysLogService;
 	//获取用户行为信息(谁在什么时间,执行了什么操作,访问了什么方法,传递了什么参数,..)并进行记录
-	private void saveLog(ProceedingJoinPoint jp,long time){
+	private void saveLog(ProceedingJoinPoint jp,long time)throws Exception{
 		//1.获取用户行为信息
-		String ip="192.168.1.111";
-		String username="admin";
-		String operation="operation";
-		String method="com.cy.pj.sys.service.impl.SysUserServiceImpl.findPageObjects";
-		String params="xiaoli,1";
+		//1.1获取ip地址
+		String ip=IPUtils.getIpAddr();
+		//1.2获取登陆用户名
+		String username="admin";//做完登陆以后获取登陆的用户名
+		//1.3获取目标方法上RequiredLog注解指定的操作名
+		//1.3.1获取目标方法对象
+		//1.3.1.1获取目标对象类型
+		Class<?> targetClass=jp.getTarget().getClass();
+		//1.3.1.2获取目标类中目标方法
+		MethodSignature ms=(MethodSignature)jp.getSignature();
+		Method targetMethod=
+		targetClass.getDeclaredMethod(ms.getName(), ms.getParameterTypes());
+		//1.3.2获取目标方法对象上的RequiredLog注解
+		RequiredLog requiredLog=targetMethod.getAnnotation(RequiredLog.class);
+	    //1.3.3获取注解中指定的操作名
+		String operation=null;
+		if(requiredLog!=null) {//当切入点为注解表达式，此语句可以不进行判定
+		  operation=requiredLog.operation();
+		}
+		//1.4获取目标方法的类全名以及方法名
+		String method=targetClass.getName()+"."+targetMethod.getName();
+		//1.5获取执行方法时传入的实际参数
+		String params=new ObjectMapper().writeValueAsString(jp.getArgs());
 		//2.对用户行为信息进行封装
 		SysLog userLog=new SysLog();
 		userLog.setIp(ip);
