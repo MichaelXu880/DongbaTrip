@@ -11,7 +11,7 @@ import java.util.*;
  */
 public interface SysLogService {//SysLogService为实现类
 	
-
+	void saveObject(SysLog entity);
 	/**
 	 * 基于日志记录id执行删除操作
 	 * @param ids

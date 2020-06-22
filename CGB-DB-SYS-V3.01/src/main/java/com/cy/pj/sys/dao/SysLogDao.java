@@ -11,6 +11,12 @@ import com.cy.pj.sys.entity.SysLog;
  */
 @Mapper
 public interface SysLogDao {
+	 /**
+	  * 将日志信息写入到数据库
+	  * @param entity
+	  * @return
+	  */
+	 int insertObject(SysLog entity);
 	
 	 /**
 	  * 基于多个id删除日志信息

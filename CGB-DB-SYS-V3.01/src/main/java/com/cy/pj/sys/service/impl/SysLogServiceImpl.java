@@ -18,6 +18,10 @@ public class SysLogServiceImpl implements SysLogService {
 	@Autowired
 	private SysLogDao sysLogDao;
 
+	@Override
+	public void saveObject(SysLog entity) {
+		sysLogDao.insertObject(entity);
+	}
 	
 	@Override
 	public int deleteObjects(Integer... ids) {
@@ -47,7 +51,7 @@ public class SysLogServiceImpl implements SysLogService {
             throw new ServiceException("没有对应记录");//此异常如何定义？
 		//3.查询当前页记录
 		//定义每页最多要显示的记录数
-		int pageSize=50;
+		int pageSize=5;
 		//计算当前页查询的起始位置
 		int startIndex=(pageCurrent-1)*pageSize;
 		List<SysLog> records=

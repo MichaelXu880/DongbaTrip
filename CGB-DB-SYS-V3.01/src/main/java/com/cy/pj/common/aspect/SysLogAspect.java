@@ -1,10 +1,16 @@
 package com.cy.pj.common.aspect;
+import java.util.Date;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import com.cy.pj.sys.entity.SysLog;
+import com.cy.pj.sys.service.SysLogService;
 
 import lombok.extern.slf4j.Slf4j;
 /**
@@ -34,14 +40,40 @@ public class SysLogAspect {
 	@Around("doLogPointCut()")
 	public Object doAround(ProceedingJoinPoint jp) throws Throwable {
 		System.out.println("SysLogAspect.doAround");
-		log.info("start {}",System.currentTimeMillis());
+		long start=System.currentTimeMillis();
+		log.info("start {}",start);
 		try {
 		Object result=jp.proceed();//调用逻辑:本类中其它通知-->其它切面-->还有目标方法
-		log.info("end {}",System.currentTimeMillis());
+		long end=System.currentTimeMillis();
+		log.info("end {}",end);
+		//记录用户的正常行为信息
+		saveLog(jp,(end-start));//基于此方法将用户行为信息写到数据库中
 		return result;
 		}catch(Throwable e) {
 		log.error("error {}",e.getMessage());
 		throw e;
 		}
+	}
+	@Autowired
+	private SysLogService sysLogService;
+	//获取用户行为信息(谁在什么时间,执行了什么操作,访问了什么方法,传递了什么参数,..)并进行记录
+	private void saveLog(ProceedingJoinPoint jp,long time){
+		//1.获取用户行为信息
+		String ip="192.168.1.111";
+		String username="admin";
+		String operation="operation";
+		String method="com.cy.pj.sys.service.impl.SysUserServiceImpl.findPageObjects";
+		String params="xiaoli,1";
+		//2.对用户行为信息进行封装
+		SysLog userLog=new SysLog();
+		userLog.setIp(ip);
+		userLog.setUsername(username);
+		userLog.setOperation(operation);
+		userLog.setMethod(method);
+		userLog.setParams(params);
+		userLog.setTime(time);
+		userLog.setCreatedTime(new Date());
+		//3.将用户行为信息写入到数据库
+		sysLogService.saveObject(userLog);
 	}
 }//XxxController-->XxxService(XxxServiceImpl$$EnhancerXXX)--->Aspect-->XxxServiceImpl
